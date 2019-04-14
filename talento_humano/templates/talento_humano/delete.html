@@ -1,0 +1,12 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Eliminar Empleado - G. R.{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <p>Se va a eliminar al empleado {{ empleado }}</p>
+        <p>¿Esta seguro de que desea realizar esta acción?</p>
+        <br>
+        <input type="submit" value="Si, estoy seguro.">
+    </form>
+{% endblock %}

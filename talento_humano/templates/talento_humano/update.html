@@ -1,0 +1,13 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Actualizar Empleado - G. R.{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <input type="submit" value="Actualizar">
+    </form>
+{% endblock %}

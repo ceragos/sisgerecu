@@ -378,7 +378,7 @@
 				</div>
 
 				<ul class="nav nav-list">
-					<li class="active">
+					<li class="{% if request.path == '/agenda_general/' %}active{% endif %}">
 						<a href="index.html">
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
@@ -389,7 +389,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
+					<li class="{% if request.path == '/mi_agenda/' %}active{% endif %}">
 						<a href="#">
 							<i class="menu-icon fa fa-book"></i>
 							<span class="menu-text">
@@ -400,8 +400,8 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
-						<a href="#">
+					<li class="{% if request.path == '/talento_humano/' %}active{% endif %}">
+						<a href="{% url 'empleado.list' %}">
 							<i class="menu-icon fa fa-users"></i>
 							<span class="menu-text">
                                 Talento Humano
@@ -411,7 +411,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
+					<li class="{% if request.path == '/recursos/' %}active open{% endif %}">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text">
@@ -424,7 +424,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<li class="">
+							<li class="{% if request.path == '/recursos/fisicos/' %}active{% endif %}">
 								<a href="form-elements.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Fisicos
@@ -433,7 +433,7 @@
 								<b class="arrow"></b>
 							</li>
 
-							<li class="">
+							<li class="{% if request.path == '/recursos/tecnologicos/' %}active{% endif %}">
 								<a href="form-elements-2.html">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tecnologicos
@@ -524,11 +524,13 @@
 		<script src="{% static 'nucleo/assets/js/bootstrap.min.js' %}"></script>
 
 		<!-- page specific plugin scripts -->
+        {% block js_extra %}{% endblock %}
 
 		<!-- ace scripts -->
 		<script src="{% static 'nucleo/assets/js/ace-elements.min.js' %}"></script>
 		<script src="{% static 'nucleo/assets/js/ace.min.js' %}"></script>
 
 		<!-- inline scripts related to this page -->
+        {% block js_script %}{% endblock %}
 	</body>
 </html>
