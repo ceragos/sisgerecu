@@ -48,8 +48,18 @@
 		<div id="navbar" class="navbar navbar-default          ace-save-state">
 			<div class="navbar-container ace-save-state" id="navbar-container">
 
+                <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
 				<div class="navbar-header pull-left">
-					<a href="index.html" class="navbar-brand">
+					<a href="{% url 'index' %}" class="navbar-brand">
                         <i class="fa fa-fire"></i>
 						<small>
 							Gestión de Recursos
@@ -369,7 +379,7 @@
 				<!-- /.sidebar-shortcuts -->
                 <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                     <div class="breadcrumbs ace-save-state">
-                        <a href="index.html" class="navbar-brand">
+                        <a href="{% url 'index' %}" class="navbar-brand">
                             <small>
                                 Remington
                             </small>
@@ -450,21 +460,19 @@
 				<div class="main-content-inner">
 					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
 
-                        <!-- /.breadcrumb -->
                         <ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="#">Home</a>
-							</li>
+							{% block breadcrumb %}{% endblock %}
+						</ul><!-- /.breadcrumb -->
 
-							<li>
-								<a href="#">Other Pages</a>
-							</li>
-							<li class="active">Blank Page</li>
-						</ul>
+                        <!-- /.nav-search -->
 					</div>
 
+                    <!-- /.ace-settings-container -->
+
 					<div class="page-content">
+                        {% block header %}{% endblock %}
+                        <!-- /.page-header -->
+
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -473,7 +481,6 @@
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
-
 				</div>
 			</div><!-- /.main-content -->
 

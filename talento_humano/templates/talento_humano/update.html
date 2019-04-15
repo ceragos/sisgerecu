@@ -2,6 +2,31 @@
 
 {% block title %}Actualizar Empleado - G. R.{% endblock %}
 
+{% block breadcrumb %}
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="#">Inicio</a>
+    </li>
+
+    <li>
+        <a href="#">Talento Humano</a>
+    </li>
+
+    <li class="active">Actualizar</li>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>
+            Talento Humano
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Coorporación Universitaria Reminton
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
 {% block content %}
     <form action="" method="post">{% csrf_token %}
         <table>

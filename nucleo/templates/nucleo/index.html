@@ -1,6 +1,13 @@
 {% extends 'nucleo/base.html' %}
 {% block title %}Gestión de Recursos{% endblock %}
 
+{% block breadcrumb %}
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="#">Inicio</a>
+    </li>
+{% endblock %}
+
 {% block js_extra %}
     <!--[if lte IE 8]>
       <script src="assets/js/excanvas.min.js"></script>
