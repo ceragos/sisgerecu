@@ -8,6 +8,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from talento_humano.forms import EmpleadoForm
 from talento_humano.models import Empleado
 
 # Create your views here.
@@ -25,17 +26,15 @@ class EmpleadoListView(ListView):
 
 class EmpleadoCreateView(CreateView):
     model = Empleado
+    form_class = EmpleadoForm
     template_name = 'talento_humano/create.html'
-    fields = ['numero_documento', 'nombres', 'apellidos', 'celular', 'correo_electronico', 'titulo_obtenido',
-              'carrera_profesional', 'perfil']
     success_url = reverse_lazy('empleado.list')
 
 
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
+    form_class = EmpleadoForm
     template_name = 'talento_humano/update.html'
-    fields = ['numero_documento', 'nombres', 'apellidos', 'celular', 'correo_electronico', 'titulo_obtenido',
-              'carrera_profesional', 'perfil']
     success_url = reverse_lazy('empleado.list')
 
 

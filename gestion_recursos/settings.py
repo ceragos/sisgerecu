@@ -31,12 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Apps de Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps de terceros
+    'crispy_forms',
+    # Mis apps
     'nucleo',
     'talento_humano',
 ]
@@ -121,6 +125,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+#START CRISPY FORMS CONFIGURATION
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+#END CRISPY FORMS CONFIGURATION
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
