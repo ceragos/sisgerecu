@@ -61,8 +61,8 @@ class RecursoTecnologico(MarcadorTiempo, Recurso):
     nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre', unique=True)
 
     class Meta:
-        verbose_name = 'recurso fisico'
-        verbose_name_plural = 'recursos fisicos'
+        verbose_name = 'recurso tecnologico'
+        verbose_name_plural = 'recursos tecnologicos'
         ordering = ['nombre']
 
     def __str__(self):
