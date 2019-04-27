@@ -434,7 +434,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<li class="{% if request.path == '/recursos/fisicos/' %}active{% endif %}">
+							<li class="{% if request.path|slice:":18" == '/recursos/fisicos/' %}active{% endif %}">
 								<a href="{% url 'recursos.fisicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Fisicos
@@ -443,7 +443,7 @@
 								<b class="arrow"></b>
 							</li>
 
-							<li class="{% if request.path == '/recursos/tecnologicos/' %}active{% endif %}">
+							<li class="{% if request.path|slice:":23" == '/recursos/tecnologicos/' %}active{% endif %}">
 								<a href="{% url 'recursos.tecnologicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tecnologicos

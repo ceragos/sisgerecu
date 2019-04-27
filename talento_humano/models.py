@@ -12,7 +12,7 @@ class Persona(models.Model):
     nombres = models.CharField(null=True, blank=False, verbose_name='nombres', max_length=40)
     apellidos = models.CharField(null=True, blank=False, verbose_name='apellidos', max_length=40)
     celular = models.CharField(null=False, blank=False, verbose_name='celular', max_length=40)
-    correo_electronico = models.EmailField(null=True, blank=True, verbose_name='correo electronico', max_length=40)
+    correo_electronico = models.EmailField(null=True, blank=False, verbose_name='correo electronico', max_length=40)
     fecha_nacimiento = models.DateField(null=True, blank=True, verbose_name='fecha de nacimiento')
     edad = models.IntegerField(null=True, blank=True, verbose_name='edad', default=0)
 
@@ -89,9 +89,9 @@ class Perfil(MarcadorTiempo):
 
 class Empleado(MarcadorTiempo, Persona):
     fecha_ingreso = models.DateField(null=True, blank=True, verbose_name='fecha de ingreso')
-    titulo_obtenido = models.ForeignKey(TituloObtenido,  null=True, blank=False, verbose_name='titulo obtenido', on_delete=models.CASCADE)
-    carrera_profesional = models.ForeignKey(CarrreraProfesional,  null=True, blank=False, verbose_name='carrera profesional', on_delete=models.CASCADE)
-    perfil = models.ForeignKey(Perfil,  null=True, blank=False, verbose_name='perfil', on_delete=models.CASCADE)
+    titulo_obtenido = models.ForeignKey(TituloObtenido,  null=True, blank=True, verbose_name='titulo obtenido', on_delete=models.CASCADE)
+    carrera_profesional = models.ForeignKey(CarrreraProfesional,  null=True, blank=True, verbose_name='carrera profesional', on_delete=models.CASCADE)
+    perfil = models.ForeignKey(Perfil,  null=True, blank=True, verbose_name='perfil', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "empleado"
