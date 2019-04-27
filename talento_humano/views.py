@@ -16,7 +16,7 @@ class EmpleadoListView(ListView):
 
     model = Empleado
     paginate_by = 100  # if pagination is desired
-    template_name = 'talento_humano/list.html'
+    template_name = 'talento_humano/listar.html'
     context_object_name = 'talento_humano'
 
     def get_context_data(self, **kwargs):
@@ -27,18 +27,18 @@ class EmpleadoListView(ListView):
 class EmpleadoCreateView(CreateView):
     model = Empleado
     form_class = EmpleadoForm
-    template_name = 'talento_humano/create.html'
+    template_name = 'talento_humano/crear.html'
     success_url = reverse_lazy('empleado.list')
 
 
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
     form_class = EmpleadoForm
-    template_name = 'talento_humano/update.html'
+    template_name = 'talento_humano/actualizar.html'
     success_url = reverse_lazy('empleado.list')
 
 
 class EmpleadoDeleteView(DeleteView):
     model = Empleado
-    template_name = 'talento_humano/delete.html'
+    template_name = 'talento_humano/eliminar.html'
     success_url = reverse_lazy('empleado.list')
