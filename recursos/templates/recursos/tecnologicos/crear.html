@@ -1,0 +1,36 @@
+{% extends 'nucleo/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Crear Recurso - G. R.{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="#">Recursos Tecnologicos</a>
+    </li>
+
+    <li class="active">Crear</li>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>
+            Recursos Tecnologicos
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Coorporación Universitaria Reminton
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-5">
+        <form action="" method="post">{% csrf_token %}
+                {{ form|crispy }}
+            <br>
+            <button type="submit" value="Crear" class="btn btn-primary"><i class="ace-icon fa fa-check bigger-120"></i>Crear</button>
+            <a href="{% url 'recursos.tecnologicos.listar' %}" class="btn btn-default">Cancelar</a>
+        </form>
+    </div>
+
+{% endblock %}
