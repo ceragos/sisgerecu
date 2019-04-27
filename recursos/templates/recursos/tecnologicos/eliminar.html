@@ -1,0 +1,33 @@
+{% extends 'nucleo/base.html' %}
+
+{% block title %}Eliminar Recurso - G. R.{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="#">Recursos Tecnologicos</a>
+    </li>
+
+    <li class="active">Eliminar</li>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>
+            Recursos Tecnologicos
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Coorporación Universitaria Reminton
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        <h4>Se va a eliminar el recurso tecnologico <strong>{{ recursotecnologico }}</strong></h4>
+        <p><span class="bigger-120">¿Esta seguro de que desea realizar esta acción?<span></p>
+        <br>
+        <button type="submit" value="Si, estoy seguro." class="btn btn-danger"><i class="ace-icon fa fa-trash-o bigger-120"></i>Si, estoy seguro.</button>
+        <a href="{% url 'recursos.tecnologicos.listar' %}" class="btn btn-default">No, cancelar</a>
+    </form>
+{% endblock %}
