@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+from nucleo.models import MarcadorTiempo
+
+
 class Persona(models.Model):
     numero_documento = models.CharField(null=True, blank=False, verbose_name='numero de documento', max_length=40)
     nombres = models.CharField(null=True, blank=False, verbose_name='nombres', max_length=40)
@@ -48,7 +51,7 @@ class Persona(models.Model):
         return super(Persona, self).save(*args, **kwargs)
 
 
-class TituloObtenido(models.Model):
+class TituloObtenido(MarcadorTiempo):
     nombre = models.CharField(null=True, blank=False, verbose_name='nombre', max_length=40)
 
     class Meta:
@@ -60,7 +63,7 @@ class TituloObtenido(models.Model):
         return "%s" % self.nombre
 
 
-class CarrreraProfesional(models.Model):
+class CarrreraProfesional(MarcadorTiempo):
     nombre = models.CharField(null=True, blank=False, verbose_name='nombre', max_length=40)
 
     class Meta:
@@ -72,7 +75,7 @@ class CarrreraProfesional(models.Model):
         return "%s" % self.nombre
 
 
-class Perfil(models.Model):
+class Perfil(MarcadorTiempo):
     nombre = models.CharField(null=True, blank=False, verbose_name='nombre', max_length=40)
 
     class Meta:
@@ -84,7 +87,7 @@ class Perfil(models.Model):
         return "%s" % self.nombre
 
 
-class Empleado(Persona):
+class Empleado(MarcadorTiempo, Persona):
     fecha_ingreso = models.DateField(null=True, blank=True, verbose_name='fecha de ingreso')
     titulo_obtenido = models.ForeignKey(TituloObtenido,  null=True, blank=False, verbose_name='titulo obtenido', on_delete=models.CASCADE)
     carrera_profesional = models.ForeignKey(CarrreraProfesional,  null=True, blank=False, verbose_name='carrera profesional', on_delete=models.CASCADE)
