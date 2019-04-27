@@ -23,7 +23,8 @@ from nucleo.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include('nucleo.urls')),
-    path(r'^talento_humano/', include('talento_humano.urls')),
+    path(r'talento_humano/', include('talento_humano.urls')),
+    path(r'recursos/', include('recursos.urls')),
 ]
 
 if settings.DEBUG:

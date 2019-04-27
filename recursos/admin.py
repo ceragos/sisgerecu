@@ -10,11 +10,11 @@ class TipoAulaAdmin(admin.ModelAdmin):
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 class RecursoFisicoAdmin(admin.ModelAdmin):
-    fields = ['tipo_aula', 'numero', 'nombre', 'contenido', 'fecha_creacion', 'fecha_modificacion']
+    fields = ['tipo_aula', 'numero', 'nombre', 'ubicacion', 'capacidad', 'caracteristicas', 'contenido', 'fecha_creacion', 'fecha_modificacion']
     readonly_fields = ['nombre', 'fecha_creacion', 'fecha_modificacion']
 
 class RecursoTecnologicoAdmin(admin.ModelAdmin):
-    fields = ['tipo_equipo', 'numero', 'nombre', 'contenido', 'fecha_creacion', 'fecha_modificacion']
+    fields = ['tipo_equipo', 'numero', 'nombre', 'marca', 'referencia', 'color', 'caracteristicas', 'contenido', 'fecha_creacion', 'fecha_modificacion']
     readonly_fields = ['nombre', 'fecha_creacion', 'fecha_modificacion']
 
 admin.site.register(TipoEquipo, TipoEquipoAdmin)

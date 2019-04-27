@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.urls import path
 
 from talento_humano.views import EmpleadoListView, EmpleadoCreateView, EmpleadoUpdateView, EmpleadoDeleteView

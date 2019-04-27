@@ -1,0 +1,120 @@
+{% extends 'nucleo/base.html' %}
+{% block title %}Recursos Fisicos - G. R.{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="#">Recursos Fisicos</a>
+    </li>
+
+    <li class="active">Listar</li>
+{% endblock %}
+
+{% block header %}
+    <div class="ace-settings-container" id="ace-settings-container">
+        <a href="{% url 'empleado.create' %}" class="btn btn-primary align-right">
+            <i class="ace-icon fa fa-flask align-top bigger-125"></i>
+            Crear Recurso Fisico
+        </a>
+    </div>
+
+    <div class="page-header">
+        <h1>
+            Recursos Fisicos
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Coorporación Universitaria Reminton
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ubicacion</th>
+                        <th>Capacidad</th>
+                        <th>Caracteristicas</th>
+                        <th>Contenido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for recurso in recursos_fisicos %}
+                        <tr>
+                            <td>{{ recurso.nombre }}</td>
+                            <td>{{ recurso.ubicacion }}</td>
+                            <td>{{ recurso.capacidad }} personas</td>
+                            <td>{{ recurso.caracteristicas }}</td>
+                            <td>{{ recurso.contenido }}</td>
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <button class="btn btn-xs btn-success">
+                                        <i class="ace-icon fa fa-check bigger-120"></i>
+                                    </button>
+
+                                    <a href="#" class="btn btn-xs btn-info">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+
+                                    <a href="#" class="btn btn-xs btn-danger">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </a>
+
+                                    <button class="btn btn-xs btn-warning">
+                                        <i class="ace-icon fa fa-flag bigger-120"></i>
+                                    </button>
+                                </div>
+
+                                <div class="hidden-md hidden-lg">
+                                    <div class="inline pos-rel">
+                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                                    <span class="blue">
+                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                    <span class="red">
+                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% empty %}
+                        <tr>
+                            <td colspan="8" align="center">
+                                No existen empleados registrados en este momento.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

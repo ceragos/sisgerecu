@@ -421,7 +421,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="{% if request.path == '/recursos/' %}active open{% endif %}">
+					<li class="{% if request.path|slice:":10" == '/recursos/' %}active open{% endif %}">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text">
@@ -435,7 +435,7 @@
 
 						<ul class="submenu">
 							<li class="{% if request.path == '/recursos/fisicos/' %}active{% endif %}">
-								<a href="form-elements.html">
+								<a href="{% url 'recursos.fisicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Fisicos
 								</a>
@@ -444,7 +444,7 @@
 							</li>
 
 							<li class="{% if request.path == '/recursos/tecnologicos/' %}active{% endif %}">
-								<a href="form-elements-2.html">
+								<a href="{% url 'recursos.tecnologicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tecnologicos
 								</a>
