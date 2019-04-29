@@ -91,3 +91,13 @@ class RecursoTecnologico(MarcadorTiempo, Recurso):
         except:
             self.full_clean()
         return super(RecursoTecnologico, self).save(*args, **kwargs)
+
+
+class GaleriaRecursoFisico(MarcadorTiempo):
+    recurso_fisico = models.ForeignKey(RecursoFisico, verbose_name='recurso fisico', on_delete=models.CASCADE)
+    imagen = models.ImageField(verbose_name='imagen')
+
+
+class GaleriaRecursoTecnologico(MarcadorTiempo):
+    recurso_fisico = models.ForeignKey(RecursoTecnologico, verbose_name='recurso tecnologico', on_delete=models.CASCADE)
+    imagen = models.ImageField(verbose_name='imagen')
