@@ -20,11 +20,11 @@ class RecursoTecnologicoAdmin(admin.ModelAdmin):
     readonly_fields = ['nombre', 'fecha_creacion', 'fecha_modificacion']
 
 class GaleriaRecursoFisicoAdmin(admin.ModelAdmin):
-    fields = ['recurso_fisico', 'imagen','fecha_creacion', 'fecha_modificacion']
+    fields = ['recurso_fisico', 'imagen', 'fecha_creacion', 'fecha_modificacion']
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 class GaleriaRecursoTecnologicoAdmin(admin.ModelAdmin):
-    fields = ['recurso_tecnologico', 'imagen','fecha_creacion', 'fecha_modificacion']
+    fields = ['recurso_tecnologico', 'imagen', 'fecha_creacion', 'fecha_modificacion']
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 admin.site.register(TipoEquipo, TipoEquipoAdmin)

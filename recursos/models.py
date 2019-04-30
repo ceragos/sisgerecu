@@ -97,7 +97,13 @@ class GaleriaRecursoFisico(MarcadorTiempo):
     recurso_fisico = models.ForeignKey(RecursoFisico, verbose_name='recurso fisico', on_delete=models.CASCADE)
     imagen = models.ImageField(verbose_name='imagen')
 
+    def __str__(self):
+        return 'Foto %s' % self.recurso_fisico.nombre
+
 
 class GaleriaRecursoTecnologico(MarcadorTiempo):
-    recurso_fisico = models.ForeignKey(RecursoTecnologico, verbose_name='recurso tecnologico', on_delete=models.CASCADE)
+    recurso_tecnologico = models.ForeignKey(RecursoTecnologico, verbose_name='recurso tecnologico', on_delete=models.CASCADE)
     imagen = models.ImageField(verbose_name='imagen')
+
+    def __str__(self):
+        return 'Foto %s' % self.recurso_tecnologico.nombre
