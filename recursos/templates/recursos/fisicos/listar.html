@@ -65,13 +65,46 @@
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
 
-                                    <button class="btn btn-xs btn-warning">
+                                    <a href="#my-modal" role="button" class="btn btn-xs btn-warning" data-toggle="modal">
                                         <i class="ace-icon fa fa-camera bigger-120"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
 
+                        <div id="my-modal" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h3 class="smaller lighter blue no-margin">A modal with a slider in it!</h3>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        Some content
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        1 {{ recurso.nombre }}
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        2
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                                            <i class="ace-icon fa fa-times"></i>
+                                            Close
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
                     {% empty %}
                         <tr>
                             <td colspan="8" align="center">
@@ -83,4 +116,37 @@
             </table>
         </div>
     </div>
+{% endblock %}
+{% block js_script %}
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <!-- ace scripts -->
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.modal.aside').ace_aside();
+
+            $('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+
+
+            //make content sliders resizable using jQuery UI (you should include jquery ui files)
+            //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+        })
+    </script>
 {% endblock %}
