@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'hr8lwn77ple_s@x95(x!#(w_ka*1$$=$v9@20=3pa&0k1&g@!)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sisgerecu.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     # Apps de terceros
     'crispy_forms',
     # Mis apps
-    'usuarios',
     'nucleo',
     'talento_humano',
     'recursos',
@@ -81,18 +80,32 @@ WSGI_APPLICATION = 'gestion_recursos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sisgerecu',
-        'USER': 'ceragos36',
-        'PASSWORD': 'seforabu-7',
-        'HOST': 'localhost',
-        'PORT': '3306',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'sisgerecu',
+            'USER': 'ceragos36',
+            'PASSWORD': 'seforabu-7',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            # 'ENGINE': 'django.db.backends.sqlite3',
+            # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'sisgerecu$sisgerecu',
+            'USER': 'sisgerecu',
+            'PASSWORD': 'seforabu-7',
+            'HOST': 'sisgerecu.mysql.pythonanywhere-services.com',
+            'PORT': '3306',
+        }
+    }
 
 
 # Password validation
@@ -135,12 +148,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Media config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Autenticación
-LOGIN_URL = '/usuarios/login/'
-
-AUTH_USER_MODEL = 'usuarios.User'
