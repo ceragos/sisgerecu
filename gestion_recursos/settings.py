@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Apps de terceros
     'crispy_forms',
     # Mis apps
+    'usuarios',
     'nucleo',
     'talento_humano',
     'recursos',
@@ -138,3 +139,8 @@ STATIC_URL = '/static/'
 # Media config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Autenticación
+LOGIN_URL = '/usuarios/login/'
+
+AUTH_USER_MODEL = 'usuarios.User'
