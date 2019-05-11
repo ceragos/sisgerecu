@@ -90,19 +90,38 @@
                                                     </div>
 
 													<div class="clearfix">
-														<label class="inline">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"> Recordarme</span>
-														</label>
-
-														<button type="submit" class="width-45 pull-right btn btn-sm btn-primary">
+														<button id="abrir-modal" type="button" class="width-50 pull-right btn btn-sm btn-primary">
 															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Iniciar Sesión</span>
+															<span class="bigger-110">Solicitar codigo</span>
 														</button>
 													</div>
-
-													<div class="space-4"></div>
 												</fieldset>
+
+                                                <dialog id="modal-cod-verif" class="widget-main">
+                                                    <div id="cerrar-modal" class="pull-right">
+                                                        <i class="ace-icon fa fa-times red2"></i>
+                                                    </div>
+
+                                                    <div class="space-20"></div>
+
+                                                    <p>Codigo de verificación enviado </p>
+                                                    <p>al numero de telefono <strong>**********</strong></p>
+
+                                                    <label class="block clearfix">
+                                                        <span class="block input-icon input-icon-right">
+                                                            <input type="text" name="cod_verif" id="cod_verif" class="form-control" placeholder="Codigo de verificación" />
+                                                            <i class="ace-icon fa fa-user"></i>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="space"></div>
+
+                                                    <div class="clearfix">
+                                                        <button type="submit" class="width-60 btn btn-sm btn-primary">
+                                                            <span class="bigger-110">Iniciar Sesión</span>
+                                                        </button>
+                                                    </div>
+                                                </dialog>
 											</form>
 
 											<div class="space-6"></div>
@@ -114,13 +133,13 @@
 											<div>
 												<a href="#" data-target="#forgot-box" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
-													I forgot my password
+													Olvidé mi contraseña
 												</a>
 											</div>
 
 											<div>
 												<a href="#" data-target="#signup-box" class="user-signup-link">
-													I want to register
+													Registrarse
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>
 											</div>
@@ -274,10 +293,10 @@
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
+<script src="{% static 'nucleo/assets/js/jquery-1.11.3.min.js' %}"></script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='{% static 'nucleo/assets/js/jquery.mobile.custom.min.js' %}'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->
@@ -319,5 +338,22 @@
 
 			});
 		</script>
+
+        <script>
+            jQuery(function ($) {
+                var modal = document.getElementById('modal-cod-verif');
+
+                var btn_abrir_modal = $('#abrir-modal');
+                var btn_cerrar_modal = $('#cerrar-modal');
+
+                btn_abrir_modal.click(function () {
+                    modal.showModal();
+                });
+
+                btn_cerrar_modal.click(function () {
+                    modal.close();
+                })
+            })
+        </script>
 	</body>
 </html>
