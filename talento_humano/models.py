@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 from nucleo.models import MarcadorTiempo
+from usuarios.models import User
 
 
 class Persona(models.Model):
@@ -88,6 +89,7 @@ class Perfil(MarcadorTiempo):
 
 
 class Empleado(MarcadorTiempo, Persona):
+    usuario = models.OneToOneField(User, null=False, blank=False, verbose_name='usuario', on_delete=models.CASCADE)
     fecha_ingreso = models.DateField(null=True, blank=True, verbose_name='fecha de ingreso')
     titulo_obtenido = models.ForeignKey(TituloObtenido,  null=True, blank=True, verbose_name='titulo obtenido', on_delete=models.CASCADE)
     carrera_profesional = models.ForeignKey(CarrreraProfesional,  null=True, blank=True, verbose_name='carrera profesional', on_delete=models.CASCADE)
