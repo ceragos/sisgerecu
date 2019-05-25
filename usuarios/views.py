@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from gestion_recursos import settings
 from usuarios.forms import SisgerecuAuthenticationForm
@@ -8,6 +8,8 @@ from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
+from usuarios.models import User
+
 
 class SisgerecuLoginView(LoginView):
     template_name = 'usuarios/login.html'
@@ -32,3 +34,10 @@ class SisgerecuLogoutView(LogoutView):
     def get(self, *args, **kwargs):
         logout(self.request)
         return super(SisgerecuLogoutView, self).get(*args, **kwargs)
+
+
+def obtener_numero_celular(request, usuario):
+    print(usuario)
+    numero_celular_usuario = User.objects.get(username=usuario).empleado.celular
+    print(numero_celular_usuario)
+    return HttpResponse("%s" % numero_celular_usuario)
