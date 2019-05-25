@@ -1,13 +1,10 @@
 import datetime
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 
 from talento_humano.models import Empleado
 
-class EmpleadoForm(UserCreationForm):
+class EmpleadoForm(forms.ModelForm):
 
     class Meta:
         model = Empleado
