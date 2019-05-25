@@ -37,7 +37,11 @@ class SisgerecuLogoutView(LogoutView):
 
 
 def obtener_numero_celular(request, usuario):
-    print(usuario)
+    """
+    Envia el numero de celular correspondiente al usuario que se recibe
+    :param request:
+    :param usuario: Usuario registrado en la base de datos
+    :return: Numero celualar del usuario
+    """
     numero_celular_usuario = User.objects.get(username=usuario).empleado.celular
-    print(numero_celular_usuario)
     return HttpResponse("%s" % numero_celular_usuario)
