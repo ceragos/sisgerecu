@@ -105,7 +105,7 @@
                                                     <div class="space-20"></div>
 
                                                     <p>Codigo de verificación enviado </p>
-                                                    <p>al numero de telefono <strong>**********</strong></p>
+                                                    <p>al numero de telefono <strong id="numero-celular-usuario">**********</strong></p>
 
                                                     <label class="block clearfix">
                                                         <span class="block input-icon input-icon-right">
@@ -345,8 +345,11 @@
 
                 var btn_abrir_modal = $('#abrir-modal');
                 var btn_cerrar_modal = $('#cerrar-modal');
+                var usuario = $('#username').val();
 
                 btn_abrir_modal.click(function () {
+                    console.log('usuario:' + $('#username').val());
+                    obtener_numero_celular($('#username').val());
                     modal.showModal();
                 });
 
@@ -354,6 +357,19 @@
                     modal.close();
                 })
             })
+        </script>
+
+        <script>
+            var label_numero_celular_usuario = $('#numero-celular-usuario');
+            var obtener_numero_celular = function(usuario){
+                $.ajax({
+                    type: 'GET',
+                    url:'/usuarios/obtener_numero_celular/'+usuario,
+                    success:function(respuesta){
+                        label_numero_celular_usuario.text(respuesta);
+                    }
+                });
+            }
         </script>
 	</body>
 </html>
