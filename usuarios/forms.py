@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+from usuarios.models import User
+
 
 class SisgerecuAuthenticationForm(AuthenticationForm):
 
@@ -11,4 +13,7 @@ class SisgerecuAuthenticationForm(AuthenticationForm):
 
 
 class CrearUsuarioForm(UserCreationForm):
-    pass
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'groups')
