@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect, HttpResponse
@@ -45,3 +47,9 @@ def obtener_numero_celular(request, usuario):
     """
     numero_celular_usuario = User.objects.get(username=usuario).empleado.celular
     return HttpResponse("%s" % numero_celular_usuario)
+
+def codigo_verificacion():
+    codigo = ""
+    for i in range(4):
+        codigo = codigo+str(random.randrange(10))
+    return codigo
