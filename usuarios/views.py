@@ -1,6 +1,8 @@
+import random
+
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView, LogoutView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from gestion_recursos import settings
 from usuarios.forms import SisgerecuAuthenticationForm
@@ -8,6 +10,8 @@ from django.urls import reverse_lazy, reverse
 
 
 # Create your views here.
+from usuarios.models import User
+
 
 class SisgerecuLoginView(LoginView):
     template_name = 'usuarios/login.html'
@@ -32,3 +36,20 @@ class SisgerecuLogoutView(LogoutView):
     def get(self, *args, **kwargs):
         logout(self.request)
         return super(SisgerecuLogoutView, self).get(*args, **kwargs)
+
+
+def obtener_numero_celular(request, usuario):
+    """
+    Envia el numero de celular correspondiente al usuario que se recibe
+    :param request:
+    :param usuario: Usuario registrado en la base de datos
+    :return: Numero celualar del usuario
+    """
+    numero_celular_usuario = User.objects.get(username=usuario).empleado.celular
+    return HttpResponse("%s" % numero_celular_usuario)
+
+def codigo_verificacion():
+    codigo = ""
+    for i in range(4):
+        codigo = codigo+str(random.randrange(10))
+    return codigo
