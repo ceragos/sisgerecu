@@ -75,11 +75,11 @@
                             </td>
 
                             <td>
-                                <a href="#">{{ empleado.numero_documento }}</a>
+                                <a href="#">{{ empleado.usuario.numero_documento }}</a>
                             </td>
-                            <td>{{ empleado.nombres }}</td>
-                            <td class="hidden-480">{{ empleado.apellidos }}</td>
-                            <td>{{ empleado.celular }}</td>
+                            <td>{{ empleado.usuario.first_name }}</td>
+                            <td class="hidden-480">{{ empleado.usuario.last_name }}</td>
+                            <td>{{ empleado.usuario.celular }}</td>
 
                             <td class="hidden-480">
                                 {% if empleado.perfil.nombre == 'Docente' %}
@@ -177,7 +177,7 @@
                                                     <div class="profile-info-name"> Usuario </div>
 
                                                     <div class="profile-info-value">
-                                                        <span>alexdoe</span>
+                                                        <span>{{ empleado.usuario.username }}</span>
                                                     </div>
                                                 </div>
 

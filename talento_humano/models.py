@@ -9,16 +9,13 @@ from usuarios.models import User
 
 
 class Persona(models.Model):
-    numero_documento = models.CharField(null=True, blank=False, verbose_name='numero de documento', max_length=40)
-    nombres = models.CharField(null=True, blank=False, verbose_name='nombres', max_length=40)
-    apellidos = models.CharField(null=True, blank=False, verbose_name='apellidos', max_length=40)
-    celular = models.CharField(null=False, blank=False, verbose_name='celular', max_length=40)
-    correo_electronico = models.EmailField(null=True, blank=False, verbose_name='correo electronico', max_length=40)
+    # numero_documento = models.CharField(null=True, blank=False, verbose_name='numero de documento', max_length=40)
+    # nombres = models.CharField(null=True, blank=False, verbose_name='nombres', max_length=40)
+    # apellidos = models.CharField(null=True, blank=False, verbose_name='apellidos', max_length=40)
+    # celular = models.CharField(null=False, blank=False, verbose_name='celular', max_length=40)
+    # correo_electronico = models.EmailField(null=True, blank=False, verbose_name='correo electronico', max_length=40)
     fecha_nacimiento = models.DateField(null=True, blank=True, verbose_name='fecha de nacimiento')
     edad = models.IntegerField(null=True, blank=True, verbose_name='edad', default=0)
-
-    def __str__(self):
-        return "%s %s" % (self.nombres, self.apellidos)
 
     @property
     def calcular_edad(self):
@@ -43,11 +40,11 @@ class Persona(models.Model):
         if self.fecha_nacimiento and not self.edad:
             self.edad = self.calcular_edad
 
-        if self.nombres:
-            self.nombres = self.nombres.upper().strip()
-
-        if self.apellidos:
-            self.apellidos = self.apellidos.upper().strip()
+        # if self.nombres:
+        #     self.nombres = self.nombres.upper().strip()
+        #
+        # if self.apellidos:
+        #     self.apellidos = self.apellidos.upper().strip()
 
         return super(Persona, self).save(*args, **kwargs)
 
@@ -98,4 +95,7 @@ class Empleado(MarcadorTiempo, Persona):
     class Meta:
         verbose_name = "empleado"
         verbose_name_plural = "empleados"
-        ordering = ['nombres']
+        ordering = ['usuario']
+
+    def __str__(self):
+        return "%s %s" % (self.usuario.first_name, self.usuario.last_name)
