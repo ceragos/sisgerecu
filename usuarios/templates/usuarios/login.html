@@ -41,18 +41,11 @@
 			<div class="main-content">
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
+                    <div style="text-align: center; margin: 0 auto;">
+                        <img src="{% static 'nucleo/assets/images/logo.png' %}" alt="">
+                    </div>
 						<div class="login-container">
-							<div class="center">
-								<h1>
-									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Gestion de Recursos</span>
-									<!--<span class="white" id="id-text2">Application</span>-->
-								</h1>
-								<h4 class="blue" id="id-company-text">&copy; Remington</h4>
-							</div>
-
-							<div class="space-6"></div>
-
+							<div class="space-18"></div>
 							<div class="position-relative">
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
@@ -69,7 +62,7 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" name="username" id="username" class="form-control" placeholder="Ususario" />
+															<input type="text" name="username" id="username" class="form-control" placeholder="Usuario" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -264,21 +257,6 @@
 									</div><!-- /.widget-body -->
 								</div><!-- /.signup-box -->
 							</div><!-- /.position-relative -->
-
-							<div class="navbar-fixed-top align-right">
-								<br />
-								&nbsp;
-								<a id="btn-login-dark" href="#">Dark</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-blur" href="#">Blur</a>
-								&nbsp;
-								<span class="blue">/</span>
-								&nbsp;
-								<a id="btn-login-light" href="#">Light</a>
-								&nbsp; &nbsp; &nbsp;
-							</div>
 						</div>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -349,7 +327,7 @@
 
                 btn_abrir_modal.click(function () {
                     console.log('usuario:' + $('#username').val());
-                    obtener_numero_celular($('#username').val());
+                    generar_codigo_autenticacion($('#username').val());
                     modal.showModal();
                 });
 
@@ -361,7 +339,7 @@
 
         <script>
             var label_numero_celular_usuario = $('#numero-celular-usuario');
-            var obtener_numero_celular = function(usuario){
+            var generar_codigo_autenticacion = function(usuario){
                 $.ajax({
                     type: 'GET',
                     url:'/usuarios/obtener_numero_celular/'+usuario,

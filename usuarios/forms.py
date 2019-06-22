@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from usuarios.models import User
 
@@ -16,4 +16,13 @@ class CrearUsuarioForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2', 'groups')
+        fields = ('numero_documento', 'first_name', 'last_name', 'celular', 'email', 'username', 'password1', 'password2', 'groups')
+
+
+class ActualizarUsuarioForm(UserChangeForm):
+    # para que no hablite el cambio de contraseña en el formulario frontend
+    password = None
+
+    class Meta:
+        model = User
+        fields = ('numero_documento', 'first_name', 'last_name', 'celular', 'email', 'username', 'groups')

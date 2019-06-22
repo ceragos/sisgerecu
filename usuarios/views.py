@@ -19,7 +19,9 @@ class SisgerecuLoginView(LoginView):
     get_success_url = reverse_lazy('index')
 
     def form_valid(self, form):
+        print(self.request.POST)
         user = form.get_user()
+        cod_verif = self.request.POST.get('cod_verif')
         if user is not None:
             login(self.request, user)
             return HttpResponseRedirect(self.get_success_url)
@@ -45,11 +47,15 @@ def obtener_numero_celular(request, usuario):
     :param usuario: Usuario registrado en la base de datos
     :return: Numero celualar del usuario
     """
-    numero_celular_usuario = User.objects.get(username=usuario).empleado.celular
+    numero_celular_usuario = User.objects.get(username=usuario).celular
     return HttpResponse("%s" % numero_celular_usuario)
 
-def codigo_verificacion():
+def generar_codigo_verificacion():
+    """
+    Genera codigo de verificacion de 4 digitos
+    :return:
+    """
     codigo = ""
     for i in range(4):
-        codigo = codigo+str(random.randrange(10))
+        codigo = codigo + str(random.randrange(10))
     return codigo
