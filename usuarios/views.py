@@ -51,10 +51,10 @@ def obtener_numero_celular(request, usuario):
     """
     usuario = User.objects.get(username=usuario)
     numero_celular_usuario = usuario.celular
-    # codigo_verificacion = generar_codigo_verificacion()
-    # usuario.codigo_verificacion = codigo_verificacion
-    # usuario.save()
-    # enviar_codigo_verificacion(codigo_verificacion, numero_celular_usuario)
+    codigo_verificacion = generar_codigo_verificacion()
+    usuario.codigo_verificacion = codigo_verificacion
+    usuario.save()
+    enviar_codigo_verificacion(codigo_verificacion, numero_celular_usuario)
 
     return HttpResponse("%s" % numero_celular_usuario)
 
