@@ -78,7 +78,10 @@
 
                                                     <div style="color: red;">
                                                         {% if form.errors %}
-                                                            <p>Su nombre de usuario o contraseña no coinciden. Vuelva a intentarlo.</p>
+                                                            <p>Sus datos de acceso no coinciden. Vuelva a intentarlo.</p>
+                                                        {% endif %}
+                                                        {% if 'cod_inv' in request.GET %}
+                                                            <p>Código de verificación invalido</p>
                                                         {% endif %}
                                                     </div>
 
@@ -102,7 +105,7 @@
 
                                                     <label class="block clearfix">
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="text" name="cod_verif" id="cod_verif" class="form-control" placeholder="Codigo de verificación" />
+                                                            <input type="text" name="codigo_verificacion" id="codigo_verificacion" class="form-control" placeholder="Codigo de verificación" />
                                                             <i class="ace-icon fa fa-user"></i>
                                                         </span>
                                                     </label>

@@ -21,9 +21,11 @@ class SisgerecuLoginView(LoginView):
     def form_valid(self, form):
         print(self.request.POST)
         user = form.get_user()
-        cod_verif = self.request.POST.get('cod_verif')
+        codigo_verificacion_formulario = form.data['codigo_verificacion']
+        codigo_verificacion_bd = User.objects.get(username=self.request.POST.get('username')).codigo_verificacion
         if user is not None:
-            login(self.request, user)
+            if codigo_verificacion_formulario == codigo_verificacion_bd:
+                login(self.request, user)
             return HttpResponseRedirect(self.get_success_url)
 
     def get_context_data(self, **kwargs):
@@ -47,7 +49,13 @@ def obtener_numero_celular(request, usuario):
     :param usuario: Usuario registrado en la base de datos
     :return: Numero celualar del usuario
     """
-    numero_celular_usuario = User.objects.get(username=usuario).celular
+    usuario = User.objects.get(username=usuario)
+    numero_celular_usuario = usuario.celular
+    # codigo_verificacion = generar_codigo_verificacion()
+    # usuario.codigo_verificacion = codigo_verificacion
+    # usuario.save()
+    # enviar_codigo_verificacion(codigo_verificacion, numero_celular_usuario)
+
     return HttpResponse("%s" % numero_celular_usuario)
 
 def generar_codigo_verificacion():
@@ -58,4 +66,14 @@ def generar_codigo_verificacion():
     codigo = ""
     for i in range(4):
         codigo = codigo + str(random.randrange(10))
+    print(codigo)
     return codigo
+
+
+def enviar_codigo_verificacion(codigo_verificacion, numero_celular):
+    import instasent
+    client = instasent.Client('3c0a1c10cd7bb3ea6eef9a46d3a8f26282dbf868')
+    mensaje = 'Su codigo de verificación es: %s' % codigo_verificacion
+    destinatario = '+57%s' % numero_celular
+    response = client.send_sms('Sisgerecu', destinatario, mensaje)
+    print(response)
