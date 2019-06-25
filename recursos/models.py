@@ -42,7 +42,7 @@ class Recurso(models.Model):
 
 class RecursoFisico(MarcadorTiempo, Recurso):
     tipo_aula = models.ForeignKey(TipoAula, null=True, blank=True, verbose_name='tipo de aula',on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre', unique=True)
+    nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre')
     capacidad = models.IntegerField(verbose_name='capacidad', null=True, blank=True)
     ubicacion = models.CharField(max_length=40, null=True, blank=True, verbose_name='ubicación')
 
@@ -68,7 +68,7 @@ class RecursoFisico(MarcadorTiempo, Recurso):
 
 class RecursoTecnologico(MarcadorTiempo, Recurso):
     tipo_equipo = models.ForeignKey(TipoEquipo, null=True, blank=True, verbose_name='tipo de equipo', on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre', unique=True)
+    nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre')
     marca = models.CharField(max_length=40, null=True, blank=True, verbose_name='marca')
     referencia = models.CharField(max_length=40, null=True, blank=True, verbose_name='referencia')
     color = models.CharField(max_length=40, null=True, blank=True, verbose_name='color')
