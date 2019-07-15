@@ -1,0 +1,118 @@
+{% extends 'nucleo/base.html' %}
+{% block title %}Agenda - G. R.{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="#">Agenda</a>
+    </li>
+
+    <li class="active">Listar</li>
+{% endblock %}
+
+{% block header %}
+    <div class="ace-settings-container" id="ace-settings-container">
+        <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-right">
+            <i class="ace-icon fa fa-flask align-top bigger-125"></i>
+            Agendar Recursos
+        </a>
+    </div>
+
+    <div class="page-header">
+        <h1>
+            Agenda
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Coorporación Universitaria Remington
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Responsable</th>
+                        <th>Fecha Entrega</th>
+                        <th>Fecha Devolución</th>
+                        <th>Recurso Fisico</th>
+                        <th>Recurso Tecnologico</th>
+{#                        <th></th>#}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for solicitud in agendas %}
+                        <tr>
+                            <td>{{ solicitud.usuario.nombre_completo }}</td>
+                            <td>{{ solicitud.fecha_separacion }} {{ solicitud.hora_separacion }}</td>
+                            <td>{{ solicitud.fecha_devolucion }} {{ solicitud.hora_devolucion }}</td>
+                            <td>{{ solicitud.recurso_fisico }}</td>
+                            <td>
+                                {% for recurso in solicitud.recurso_tecnologico.all %}
+                                {{ recurso }} {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            </td>
+{#                            <td>#}
+{#                                <div class="hidden-sm hidden-xs btn-group">#}
+{#                                    <button class="btn btn-xs btn-success">#}
+{#                                        <i class="ace-icon fa fa-check bigger-120"></i>#}
+{#                                    </button>#}
+{##}
+{#                                    <a href="{% url 'agendas.actualizar' solicitud.id %}" class="btn btn-xs btn-info">#}
+{#                                        <i class="ace-icon fa fa-pencil bigger-120"></i>#}
+{#                                    </a>#}
+{##}
+{#                                    <a href="{% url 'agendas.eliminar' solicitud.id %}" class="btn btn-xs btn-danger">#}
+{#                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </td>#}
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8" align="center">
+                                No existen solicitudes registradas en la agenda en este momento.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block js_script %}
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+
+    <!-- ace scripts -->
+    <script src="assets/js/ace-elements.min.js"></script>
+    <script src="assets/js/ace.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.modal.aside').ace_aside();
+
+            $('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+
+
+            //make content sliders resizable using jQuery UI (you should include jquery ui files)
+            //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+        })
+    </script>
+{% endblock %}
