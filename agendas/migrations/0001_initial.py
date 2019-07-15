@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
                 ('fecha_modificacion', models.DateTimeField(blank=True, null=True)),
                 ('fecha_separacion', models.DateTimeField(verbose_name='Fecha de Separación')),
                 ('fecha_devolucion', models.DateTimeField(verbose_name='Fecha de Devolución')),
-                ('recurso_fisico', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='aplicaciones.recursos.RecursoFisico', verbose_name='Recurso fisico')),
-                ('recurso_tecnologico', models.ManyToManyField(blank=True, null=True, related_name='agenda_recurso', to='aplicaciones.recursos.RecursoTecnologico', verbose_name='Recurso Tecnologico')),
+                ('recurso_fisico', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='recursos.RecursoFisico', verbose_name='Recurso fisico')),
+                ('recurso_tecnologico', models.ManyToManyField(blank=True, null=True, related_name='agenda_recurso', to='recursos.RecursoTecnologico', verbose_name='Recurso Tecnologico')),
                 ('usuario', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL, verbose_name='Usuario')),
             ],
             options={

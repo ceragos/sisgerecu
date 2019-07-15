@@ -80,13 +80,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RecursoFisico',
             fields=[
-                ('recurso_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='aplicaciones.recursos.Recurso')),
+                ('recurso_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='recursos.Recurso')),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('fecha_modificacion', models.DateTimeField(blank=True, null=True)),
                 ('nombre', models.CharField(blank=True, max_length=40, null=True, unique=True, verbose_name='nombre')),
                 ('capacidad', models.IntegerField(blank=True, null=True, verbose_name='capacidad')),
                 ('ubicacion', models.CharField(blank=True, max_length=40, null=True, verbose_name='ubicación')),
-                ('tipo_aula', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.recursos.TipoAula', verbose_name='tipo de aula')),
+                ('tipo_aula', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='recursos.TipoAula', verbose_name='tipo de aula')),
             ],
             options={
                 'verbose_name': 'recurso fisico',
@@ -98,14 +98,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RecursoTecnologico',
             fields=[
-                ('recurso_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='aplicaciones.recursos.Recurso')),
+                ('recurso_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='recursos.Recurso')),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('fecha_modificacion', models.DateTimeField(blank=True, null=True)),
                 ('nombre', models.CharField(blank=True, max_length=40, null=True, unique=True, verbose_name='nombre')),
                 ('marca', models.CharField(blank=True, max_length=40, null=True, verbose_name='marca')),
                 ('referencia', models.CharField(blank=True, max_length=40, null=True, verbose_name='referencia')),
                 ('color', models.CharField(blank=True, max_length=40, null=True, verbose_name='color')),
-                ('tipo_equipo', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.recursos.TipoEquipo', verbose_name='tipo de equipo')),
+                ('tipo_equipo', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='recursos.TipoEquipo', verbose_name='tipo de equipo')),
             ],
             options={
                 'verbose_name': 'recurso tecnologico',
@@ -117,11 +117,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='galeriarecursotecnologico',
             name='recurso_tecnologico',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.recursos.RecursoTecnologico', verbose_name='recurso tecnologico'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recursos.RecursoTecnologico', verbose_name='recurso tecnologico'),
         ),
         migrations.AddField(
             model_name='galeriarecursofisico',
             name='recurso_fisico',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.recursos.RecursoFisico', verbose_name='recurso fisico'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recursos.RecursoFisico', verbose_name='recurso fisico'),
         ),
     ]
