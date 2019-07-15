@@ -10,7 +10,7 @@ class AgendaGeneralListView(ListView):
 
     model = Agenda
     paginate_by = 100
-    template_name = 'agendas/agenda_general.html'
+    template_name = 'agendas/agenda_general/agenda_general.html'
     context_object_name = 'agendas'
 
     def get_context_data(self, **kwargs):
@@ -22,7 +22,7 @@ class MiAgendaListView(ListView):
 
     model = Agenda
     paginate_by = 100
-    template_name = 'agendas/listar.html'
+    template_name = 'agendas/mi_agenda/listar.html'
     context_object_name = 'agendas'
 
     def get_context_data(self, **kwargs):
@@ -34,23 +34,28 @@ class MiAgendaListView(ListView):
         return queryset.filter(usuario=self.request.user)
 
 
-class AgendaCreateView(CreateView):
+class MiAgendaCreateView(CreateView):
 
     model = Agenda
     form_class = AgendaForm
-    template_name = 'agendas/crear.html'
+    template_name = 'agendas/mi_agenda/crear.html'
     success_url = reverse_lazy('mi_agenda.listar')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.usuario = self.request.user
         self.object.save()
-        return super(AgendaCreateView, self).form_valid(form)
+        return super(MiAgendaCreateView, self).form_valid(form)
 
 
-class AgendaUpdateView(UpdateView):
-    pass
+class MiAgendaUpdateView(UpdateView):
+    model = Agenda
+    form_class = AgendaForm
+    template_name = 'agendas/mi_agenda/actualizar.html'
+    success_url = reverse_lazy('mi_agenda.listar')
 
 
-class AgendaDeleteView(DeleteView):
-    pass
+class MiAgendaDeleteView(DeleteView):
+    model = Agenda
+    template_name = 'agendas/mi_agenda/eliminar.html'
+    success_url = reverse_lazy('mi_agenda.listar')

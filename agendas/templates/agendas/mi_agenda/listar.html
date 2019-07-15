@@ -1,9 +1,9 @@
 {% extends 'nucleo/base.html' %}
-{% block title %}Agenda - G. R.{% endblock %}
+{% block title %}Mi Agenda - G. R.{% endblock %}
 
 {% block breadcrumb %}
     <li>
-        <a href="#">Agenda</a>
+        <a href="#">Mi Agenda</a>
     </li>
 
     <li class="active">Listar</li>
@@ -19,7 +19,7 @@
 
     <div class="page-header">
         <h1>
-            Agenda
+            Mi Agenda
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
                 Coorporación Universitaria Remington
@@ -39,7 +39,7 @@
                         <th>Fecha Devolución</th>
                         <th>Recurso Fisico</th>
                         <th>Recurso Tecnologico</th>
-{#                        <th></th>#}
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -55,21 +55,25 @@
                                 {{ recurso }} {% if not forloop.last %},{% endif %}
                                 {% endfor %}
                             </td>
-{#                            <td>#}
-{#                                <div class="hidden-sm hidden-xs btn-group">#}
-{#                                    <button class="btn btn-xs btn-success">#}
-{#                                        <i class="ace-icon fa fa-check bigger-120"></i>#}
-{#                                    </button>#}
-{##}
-{#                                    <a href="{% url 'agendas.actualizar' solicitud.id %}" class="btn btn-xs btn-info">#}
-{#                                        <i class="ace-icon fa fa-pencil bigger-120"></i>#}
-{#                                    </a>#}
-{##}
-{#                                    <a href="{% url 'agendas.eliminar' solicitud.id %}" class="btn btn-xs btn-danger">#}
-{#                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </td>#}
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <button class="btn btn-xs btn-success">
+                                        <i class="ace-icon fa fa-check bigger-120"></i>
+                                    </button>
+
+                                    <a href="{% url 'agendas.actualizar' solicitud.id %}" class="btn btn-xs btn-info">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+
+                                    <a href="{% url 'agendas.eliminar' solicitud.id %}" class="btn btn-xs btn-danger">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </a>
+
+                                    <button class="btn btn-xs btn-warning">
+                                        <i class="ace-icon fa fa-camera bigger-120"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     {% empty %}
                         <tr>
