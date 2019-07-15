@@ -17,6 +17,7 @@ class RecursoFisicoForm(forms.ModelForm):
             'contenido': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
+
 class RecursoTecnologicoForm(forms.ModelForm):
 
     class Meta:

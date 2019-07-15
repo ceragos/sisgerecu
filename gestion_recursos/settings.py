@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'nucleo',
     'talento_humano',
     'recursos',
-    'agenda',
+    'agendas',
 ]
 
 MIDDLEWARE = [

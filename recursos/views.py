@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -40,6 +37,7 @@ class RecursoFisicoDeleteView(DeleteView):
 
 
 class RecursoTecnologicoListView(ListView):
+
     model = RecursoTecnologico
     paginate_by = 100  # if pagination is desired
     template_name = 'recursos/tecnologicos/listar.html'
@@ -51,6 +49,7 @@ class RecursoTecnologicoListView(ListView):
 
 
 class RecursoTecnologicoCreateView(CreateView):
+
     model = RecursoTecnologico
     form_class = RecursoTecnologicoForm
     template_name = 'recursos/tecnologicos/crear.html'

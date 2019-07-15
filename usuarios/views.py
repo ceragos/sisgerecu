@@ -33,6 +33,7 @@ class SisgerecuLoginView(LoginView):
         context = super(SisgerecuLoginView, self).get_context_data(**kwargs)
         return context
 
+
 class SisgerecuLogoutView(LogoutView):
     template_name = 'usuarios/login.html'
     form_class = SisgerecuAuthenticationForm
@@ -61,10 +62,11 @@ def obtener_numero_celular(request, usuario):
     usuario.codigo_verificacion = codigo_verificacion
     usuario.save()
 
-    #Se llama a la funcion que envia el codigo de verificacion al numero celular del usuario
+    # Se llama a la funcion que envia el codigo de verificacion al numero celular del usuario
     enviar_codigo_verificacion(codigo_verificacion, numero_celular_usuario)
 
     return HttpResponse("%s" % numero_celular_usuario)
+
 
 def generar_codigo_verificacion():
     """

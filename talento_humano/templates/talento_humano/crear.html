@@ -17,7 +17,7 @@
             Talento Humano
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Coorporación Universitaria Reminton
+                Coorporación Universitaria Remington
             </small>
         </h1>
     </div>
@@ -26,10 +26,11 @@
 {% block content %}
     <div class="col-xs-12 col-sm-5">
         <form action="" method="post">{% csrf_token %}
-                {{ form_user|crispy }}
-                {{ form|crispy }}
+            {{ form_user|crispy }}
+            {{ form|crispy }}
             <br>
-            <button type="submit" value="Crear" class="btn btn-primary"><i class="ace-icon fa fa-check bigger-120"></i>Crear</button>
+            <button type="submit" value="Crear" class="btn btn-primary"><i class="ace-icon fa fa-check bigger-120"></i>Crear
+            </button>
             <a href="{% url 'empleado.list' %}" class="btn btn-default">Cancelar</a>
         </form>
     </div>

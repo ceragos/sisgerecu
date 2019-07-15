@@ -31,6 +31,7 @@ class EmpleadoListView(ListView):
 
 
 class EmpleadoCreateView(CreateView):
+
     model = Empleado
     form_class = EmpleadoForm
     form_class_user = CrearUsuarioForm
@@ -59,6 +60,7 @@ class EmpleadoCreateView(CreateView):
 
 
 class EmpleadoUpdateView(UpdateView):
+
     model = Empleado
     model_user = User
     form_class = EmpleadoForm
@@ -96,6 +98,7 @@ class EmpleadoUpdateView(UpdateView):
 
 
 class EmpleadoDeleteView(DeleteView):
+
     model = Empleado
     template_name = 'talento_humano/eliminar.html'
     success_url = reverse_lazy('empleado.list')

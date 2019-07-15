@@ -64,7 +64,8 @@ class RecursoFisico(MarcadorTiempo, Recurso):
 
 
 class RecursoTecnologico(MarcadorTiempo, Recurso):
-    tipo_equipo = models.ForeignKey(TipoEquipo, null=True, blank=True, verbose_name='tipo de equipo', on_delete=models.CASCADE)
+    tipo_equipo = models.ForeignKey(TipoEquipo, null=True, blank=True, verbose_name='tipo de equipo',
+                                    on_delete=models.CASCADE)
     nombre = models.CharField(max_length=40, null=True, blank=True, verbose_name='nombre')
     marca = models.CharField(max_length=40, null=True, blank=True, verbose_name='marca')
     referencia = models.CharField(max_length=40, null=True, blank=True, verbose_name='referencia')
@@ -96,7 +97,8 @@ class GaleriaRecursoFisico(MarcadorTiempo):
 
 
 class GaleriaRecursoTecnologico(MarcadorTiempo):
-    recurso_tecnologico = models.ForeignKey(RecursoTecnologico, verbose_name='recurso tecnologico', on_delete=models.CASCADE)
+    recurso_tecnologico = models.ForeignKey(RecursoTecnologico, verbose_name='recurso tecnologico',
+                                            on_delete=models.CASCADE)
     imagen = models.ImageField(verbose_name='imagen', upload_to='recursos/tecnologicos')
 
     def __str__(self):
