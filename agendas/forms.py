@@ -1,4 +1,4 @@
-from datetime import date, time
+from datetime import date
 from django import forms
 
 from agendas.models import Agenda

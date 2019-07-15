@@ -70,13 +70,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Empleado',
             fields=[
-                ('persona_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='talento_humano.Persona')),
+                ('persona_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='aplicaciones.talento_humano.Persona')),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('fecha_modificacion', models.DateTimeField(blank=True, null=True)),
                 ('fecha_ingreso', models.DateField(blank=True, null=True, verbose_name='fecha de ingreso')),
-                ('carrera_profesional', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='talento_humano.CarrreraProfesional', verbose_name='carrera profesional')),
-                ('perfil', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='talento_humano.Perfil', verbose_name='perfil')),
-                ('titulo_obtenido', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='talento_humano.TituloObtenido', verbose_name='titulo obtenido')),
+                ('carrera_profesional', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.talento_humano.CarrreraProfesional', verbose_name='carrera profesional')),
+                ('perfil', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.talento_humano.Perfil', verbose_name='perfil')),
+                ('titulo_obtenido', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='aplicaciones.talento_humano.TituloObtenido', verbose_name='titulo obtenido')),
             ],
             options={
                 'verbose_name': 'empleado',

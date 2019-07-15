@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 
 # Register your models here.
-from talento_humano.models import Empleado, Perfil, CarrreraProfesional, TituloObtenido
+from .models import Empleado, Perfil, CarrreraProfesional, TituloObtenido
 
 
 class EmpleadoAdmin(admin.ModelAdmin):

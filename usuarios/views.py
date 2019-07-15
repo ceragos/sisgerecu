@@ -6,8 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from gestion_recursos import settings
 from usuarios.forms import SisgerecuAuthenticationForm
-from django.urls import reverse_lazy, reverse
-
+from django.urls import reverse_lazy
 
 # Create your views here.
 from usuarios.models import User
