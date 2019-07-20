@@ -35,8 +35,9 @@
                 <thead>
                     <tr>
                         <th>Responsable</th>
-                        <th>Fecha Entrega</th>
-                        <th>Fecha Devolución</th>
+                        <th>Fecha Separacion</th>
+                        <th>Hora Separacion</th>
+                        <th>Hora Devolución</th>
                         <th>Recurso Fisico</th>
                         <th>Recurso Tecnologico</th>
                         <th></th>
@@ -44,14 +45,15 @@
                 </thead>
 
                 <tbody>
-                    {% for solicitud in agendas %}
+                    {% for reserva in agendas %}
                         <tr>
-                            <td>{{ solicitud.usuario.nombre_completo }}</td>
-                            <td>{{ solicitud.fecha_separacion }} {{ solicitud.hora_separacion }}</td>
-                            <td>{{ solicitud.fecha_devolucion }} {{ solicitud.hora_devolucion }}</td>
-                            <td>{{ solicitud.recurso_fisico }}</td>
+                            <td>{{ reserva.usuario.nombre_completo }}</td>
+                            <td>{{ reserva.fecha_separacion }}</td>
+                            <td>{{ reserva.hora_separacion }}</td>
+                            <td>{{ reserva.hora_devolucion }}</td>
+                            <td>{{ reserva.recurso_fisico }}</td>
                             <td>
-                                {% for recurso in solicitud.recurso_tecnologico.all %}
+                                {% for recurso in reserva.recurso_tecnologico.all %}
                                 {{ recurso }} {% if not forloop.last %},{% endif %}
                                 {% endfor %}
                             </td>
@@ -61,11 +63,11 @@
                                         <i class="ace-icon fa fa-check bigger-120"></i>
                                     </button>
 
-                                    <a href="{% url 'agendas.actualizar' solicitud.id %}" class="btn btn-xs btn-info">
+                                    <a href="{% url 'agendas.actualizar' reserva.id %}" class="btn btn-xs btn-info">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
 
-                                    <a href="{% url 'agendas.eliminar' solicitud.id %}" class="btn btn-xs btn-danger">
+                                    <a href="{% url 'agendas.eliminar' reserva.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
 
