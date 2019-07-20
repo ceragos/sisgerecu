@@ -136,9 +136,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-#START CRISPY FORMS CONFIGURATION
+# START CRISPY FORMS CONFIGURATION
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
-#END CRISPY FORMS CONFIGURATION
+# END CRISPY FORMS CONFIGURATION
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
