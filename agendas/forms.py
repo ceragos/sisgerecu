@@ -18,7 +18,7 @@ class AgendaForm(forms.ModelForm):
                   'hora_devolucion']
         widgets = {
             'recurso_fisico': forms.Select(attrs={'class': 'form-control'}),
-            'recurso_tecnologico': forms.CheckboxSelectMultple(attrs={'class': 'form-control'}),
+            'recurso_tecnologico': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'fecha_separacion': forms.SelectDateWidget(attrs={'class': 'form-control',
                                                               'style': 'display: inline; width: 32.8%;'},
                                                        years=range(date.today().year,
