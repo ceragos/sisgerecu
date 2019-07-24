@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'hr8lwn77ple_s@x95(x!#(w_ka*1$$=$v9@20=3pa&0k1&g@!)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['sisgerecu.pythonanywhere.com', 'localhost', '127.0.0.1']
 
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['sisgerecu.pythonanywhere.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     # Apps de Django
     'django.contrib.admin',
     'django.contrib.auth',

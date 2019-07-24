@@ -9,16 +9,18 @@ class SisgerecuAuthenticationForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super(SisgerecuAuthenticationForm, self).__init__(*args, **kwargs)
-        self.fields["username"].widget.attrs.update({'class': 'username', 'placeholder': 'Usuario'})
+        self.fields["username"].widget.attrs.update({'class': 'username', 'placeholder': 'User'})
         self.fields['password'].widget.attrs.update({'class': 'password', 'placeholder': 'Contraseña'})
-        self.fields['codigo_verificacion'].widget.attrs.update({'class': 'codigo_verificacion', 'placeholder': 'Codigo de verificación'})
+        self.fields['codigo_verificacion'].widget.attrs.update({'class': 'codigo_verificacion',
+                                                                'placeholder': 'Codigo de verificación'})
 
 
 class CrearUsuarioForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('numero_documento', 'first_name', 'last_name', 'celular', 'email', 'username', 'password1', 'password2', 'groups')
+        fields = ('numero_documento', 'first_name', 'last_name', 'celular', 'email', 'username', 'password1',
+                  'password2', 'groups')
 
 
 class ActualizarUsuarioForm(UserChangeForm):

@@ -48,7 +48,7 @@ def obtener_numero_celular(request, usuario):
     Envia el numero de celular correspondiente al usuario que se recibe.
     Se genera el codigo de verificacion y se almacena en el objeto usuario correspondiente.
     :param request:
-    :param usuario: Usuario registrado en la base de datos
+    :param usuario: User registrado en la base de datos
     :return: Numero celualar del usuario
     """
     usuario = User.objects.get(username=usuario)
