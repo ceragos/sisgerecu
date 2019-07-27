@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 
+
 # Create your models here.
 class MarcadorTiempo(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)

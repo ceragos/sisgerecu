@@ -22,7 +22,7 @@
             Agenda General
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Coorporación Universitaria Remington
+                Corporación UNIREMINGTON
             </small>
         </h1>
     </div>
@@ -35,9 +35,10 @@
                 <thead>
                     <tr>
                         <th>Responsable</th>
-                        <th>Fecha Entrega</th>
-                        <th>Fecha Devolución</th>
-                        <th>Recurso Fisico</th>
+                        <th>Fecha de Reserva</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Fin</th>
+                        <th>Recurso Físico</th>
                         <th>Recurso Tecnologico</th>
 {#                        <th></th>#}
                     </tr>
@@ -47,12 +48,13 @@
                     {% for solicitud in agendas %}
                         <tr>
                             <td>{{ solicitud.usuario.nombre_completo }}</td>
-                            <td>{{ solicitud.fecha_separacion }} {{ solicitud.hora_separacion }}</td>
-                            <td>{{ solicitud.fecha_devolucion }} {{ solicitud.hora_devolucion }}</td>
+                            <td>{{ solicitud.fecha_separacion }}</td>
+                            <td>{{ solicitud.hora_separacion }}</td>
+                            <td>{{ solicitud.hora_devolucion }}</td>
                             <td>{{ solicitud.recurso_fisico }}</td>
                             <td>
                                 {% for recurso in solicitud.recurso_tecnologico.all %}
-                                {{ recurso }} {% if not forloop.last %},{% endif %}
+                                {{ recurso }}{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </td>
 {#                            <td>#}

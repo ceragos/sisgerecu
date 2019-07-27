@@ -61,9 +61,10 @@
 
 				<div class="navbar-header pull-left">
 					<a href="{% url 'index' %}" class="navbar-brand">
-                        <i class="fa fa-fire"></i>
+                        <i><img src="{% static 'nucleo/assets/images/icono_logo.ico' %}" class="msg-photo" /></i>
 						<small>
-							Gestión de Recursos
+                            SISTEMA PARA LA GESTIÓN DE RECURSOS UNIREMINGTON
+{#							Sistema Para la Gestión de Recursos Uniremington#}
 						</small>
 					</a>
 				</div>
@@ -327,7 +328,7 @@
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{% static 'nucleo/assets/images/avatars/../../static/nucleo/assets/images/avatars/user.jpg' %}" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="{% static 'nucleo/assets/images/avatars/avatar2.png' %}" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
 									{{ request.user.first_name }}
@@ -382,7 +383,7 @@
                     <div class="breadcrumbs ace-save-state">
                         <a href="{% url 'index' %}" class="navbar-brand">
                             <small>
-                                Remington
+                                Menú Sisgerecu
                             </small>
                         </a>
                     </div>
