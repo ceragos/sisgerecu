@@ -74,9 +74,7 @@
                                 </div>
                             </td>
 
-                            <td>
-                                <a href="#">{{ empleado.usuario.numero_documento }}</a>
-                            </td>
+                            <td>{{ empleado.usuario.numero_documento }}</td>
                             <td>{{ empleado.usuario.first_name }}</td>
                             <td class="hidden-480">{{ empleado.usuario.last_name }}</td>
                             <td>{{ empleado.usuario.celular }}</td>
@@ -210,7 +208,7 @@
                                                     <div class="profile-info-name"> Ultimo ingreso </div>
 
                                                     <div class="profile-info-value">
-                                                        <span>3 hours ago</span>
+                                                        <span>{{ empleado.usuario.last_login }}</span>
                                                     </div>
                                                 </div>
 
