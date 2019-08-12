@@ -338,12 +338,14 @@
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
+								{% if request.user.is_staff %}
+                                <li>
 									<a href="/admin" target="_blank">
 										<i class="ace-icon fa fa-cog"></i>
 										Administrador
 									</a>
 								</li>
+                                {% endif %}
 
 								<li>
 									<a href="#">
