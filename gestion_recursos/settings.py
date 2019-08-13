@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Apps de terceros
     'crispy_forms',
-    'bootstrap_datepicker_plus',
     # Mis apps
     'usuarios',
     'nucleo',
