@@ -2,7 +2,6 @@ from datetime import date
 from django import forms
 
 from agendas.models import Agenda
-from bootstrap_datepicker_plus import DatePickerInput
 
 
 class CustomTimeInput(forms.TimeInput):
