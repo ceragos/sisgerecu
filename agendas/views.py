@@ -1,8 +1,10 @@
+from datetime import date
+
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic import CreateView, UpdateView, DeleteView
 
-from agendas.forms import AgendaForm
+from agendas.forms import AgendaForm, FechaForm
 from agendas.models import Agenda
 
 
@@ -15,7 +17,12 @@ class AgendaGeneralListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form'] = FechaForm
         return context
+
+    def get_queryset(self):
+        queryset = super(AgendaGeneralListView, self).get_queryset()
+        return queryset.filter(fecha_separacion=date.today())
 
 
 class MiAgendaListView(ListView):
@@ -27,11 +34,12 @@ class MiAgendaListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form'] = FechaForm
         return context
 
     def get_queryset(self):
         queryset = super(MiAgendaListView, self).get_queryset()
-        return queryset.filter(usuario=self.request.user)
+        return queryset.filter(usuario=self.request.user).filter(fecha_separacion=date.today())
 
 
 class MiAgendaCreateView(CreateView):
