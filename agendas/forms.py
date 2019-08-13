@@ -2,7 +2,7 @@ from datetime import date
 from django import forms
 
 from agendas.models import Agenda
-from recursos.models import RecursoTecnologico
+from bootstrap_datepicker_plus import DatePickerInput
 
 
 class CustomTimeInput(forms.TimeInput):
@@ -26,3 +26,7 @@ class AgendaForm(forms.ModelForm):
             'hora_separacion': CustomTimeInput,
             'hora_devolucion': CustomTimeInput,
         }
+
+
+class FechaForm(forms.Form):
+    fecha = forms.DateField(required=False)
