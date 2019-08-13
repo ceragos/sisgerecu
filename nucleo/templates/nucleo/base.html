@@ -403,6 +403,7 @@
 						<b class="arrow"></b>
 					</li>
 
+                    {% if request.user.empleado.perfil.nombre == 'DOCENTE' %}
 					<li class="{% if request.path|slice:":19" == '/agendas/mi_agenda/' %}active{% endif %}">
 						<a href="{% url 'mi_agenda.listar' %}">
 							<i class="menu-icon fa fa-book"></i>
@@ -413,7 +414,9 @@
 
 						<b class="arrow"></b>
 					</li>
+                    {% endif %}
 
+                    {% if request.user.empleado.perfil.nombre == 'ADMINISTRADOR' %}
 					<li class="{% if request.path|slice:":16" == '/talento_humano/' %}active{% endif %}">
 						<a href="{% url 'empleado.list' %}">
 							<i class="menu-icon fa fa-users"></i>
@@ -424,8 +427,10 @@
 
 						<b class="arrow"></b>
 					</li>
+                    {% endif %}
 
-					<li class="{% if request.path|slice:":10" == '/recursos/' %}active open{% endif %}">
+					{% if request.user.empleado.perfil.nombre == 'ADMINISTRADOR' %}
+                    <li class="{% if request.path|slice:":10" == '/recursos/' %}active open{% endif %}">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text">
@@ -457,6 +462,7 @@
 							</li>
 						</ul>
 					</li>
+                    {% endif %}
 				</ul>
 			</div>
 
