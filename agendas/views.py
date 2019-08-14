@@ -22,7 +22,12 @@ class AgendaGeneralListView(ListView):
 
     def get_queryset(self):
         queryset = super(AgendaGeneralListView, self).get_queryset()
-        return queryset.filter(fecha_separacion=date.today())
+        fecha = date.today()
+        if self.request.GET.get('fecha'):
+            from datetime import datetime
+            fecha_str = self.request.GET.get('fecha')
+            fecha = datetime.strptime(fecha_str, '%d-%m-%Y')
+        return queryset.filter(fecha_separacion=fecha)
 
 
 class MiAgendaListView(ListView):
@@ -39,7 +44,12 @@ class MiAgendaListView(ListView):
 
     def get_queryset(self):
         queryset = super(MiAgendaListView, self).get_queryset()
-        return queryset.filter(usuario=self.request.user).filter(fecha_separacion=date.today())
+        fecha = date.today()
+        if self.request.GET.get('fecha'):
+            from datetime import datetime
+            fecha_str = self.request.GET.get('fecha')
+            fecha = datetime.strptime(fecha_str, '%d-%m-%Y')
+        return queryset.filter(usuario=self.request.user).filter(fecha_separacion=fecha)
 
 
 class MiAgendaCreateView(CreateView):
