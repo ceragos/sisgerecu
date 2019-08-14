@@ -15,15 +15,15 @@
 {% endblock %}
 
 {% block header %}
-    <div class="ace-settings-container" id="ace-settings-container">
-        <a href="{% url 'recursos.tecnologicos.crear' %}" class="btn btn-primary align-right">
-            <i class="ace-icon fa fa-flask align-top bigger-125"></i>
-            Crear Recurso Tecnólogico
-        </a>
-    </div>
-
     <div class="page-header">
         <h1>
+            <a href="{% url 'recursos.tecnologicos.crear' %}"
+               class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
+                <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
+            </a>
+            <a href="{% url 'recursos.tecnologicos.crear' %}" class="btn btn-primary align-left hidden-xs">
+                Crear
+            </a>
             Recursos Tecnologicos
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -42,9 +42,9 @@
                         <th>Nombre</th>
                         <th>Marca</th>
                         <th>Referencia</th>
-                        <th>Color</th>
-                        <th>Caracteristicas</th>
-                        <th>Contenido</th>
+                        <th class="hidden-480">Color</th>
+                        <th class="hidden-480">Caracteristicas</th>
+                        <th class="hidden-480">Contenido</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,9 +55,9 @@
                             <td>{{ recurso.nombre }}</td>
                             <td>{{ recurso.marca }}</td>
                             <td>{{ recurso.referencia }}</td>
-                            <td>{{ recurso.color }}</td>
-                            <td>{{ recurso.caracteristicas }}</td>
-                            <td>{{ recurso.contenido }}</td>
+                            <td class="hidden-480">{{ recurso.color }}</td>
+                            <td class="hidden-480">{{ recurso.caracteristicas }}</td>
+                            <td class="hidden-480">{{ recurso.contenido }}</td>
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
 
@@ -65,13 +65,50 @@
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
 
-                                    <a href="{% url 'recursos.tecnologicos.eliminar' recurso.id %}" class="btn btn-xs btn-danger">
+                                    <a href="{% url 'recursos.tecnologicos.actualizar' recurso.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
 
                                     <a href="#my-modal{{ recurso.id }}" role="button" class="btn btn-xs btn-warning" data-toggle="modal">
                                         <i class="ace-icon fa fa-camera bigger-120"></i>
                                     </a>
+                                </div>
+
+                                <div class="hidden-md hidden-lg">
+                                    <div class="inline pos-rel">
+                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <li>
+                                                <a href="#my-modal{{ recurso.id }}" class="tooltip-info" data-rel="tooltip"
+                                                   title="" data-original-title="View" data-toggle="modal">
+                                                    <span class="blue">
+                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="{% url 'recursos.tecnologicos.actualizar' recurso.id %}"
+                                                   class="tooltip-success" data-rel="tooltip" title="Editar">
+                                                    <span class="green">
+                                                        <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="{% url 'recursos.tecnologicos.actualizar' recurso.id %}"
+                                                   class="tooltip-error" data-rel="tooltip" title="Eliminar">
+                                                    <span class="red">
+                                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

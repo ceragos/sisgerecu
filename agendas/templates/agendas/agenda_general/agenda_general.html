@@ -15,15 +15,17 @@
 {% endblock %}
 
 {% block header %}
-    <div class="ace-settings-container" id="ace-settings-container">
-        <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-right">
-            <i class="ace-icon fa fa-flask align-top bigger-125"></i>
-            Agendar Recursos
-        </a>
-    </div>
-
     <div class="page-header">
         <h1>
+            {% if request.user.empleado.perfil.nombre == 'Docente' %}
+                <a href="{% url 'agendas.crear' %}"
+                   class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
+                    <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
+                </a>
+                <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-left hidden-xs">
+                    Anotar
+                </a>
+            {% endif %}
             Agenda General
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -71,9 +73,9 @@
                         <th>Responsable</th>
                         <th>Fecha de Reserva</th>
                         <th>Hora Inicio</th>
-                        <th>Hora Fin</th>
-                        <th>Recurso Físico</th>
-                        <th>Recurso Tecnologico</th>
+                        <th class="hidden-480">Hora Fin</th>
+                        <th class="hidden-480">Recurso Físico</th>
+                        <th class="hidden-480">Recurso Tecnologico</th>
 {#                        <th></th>#}
                     </tr>
                 </thead>
@@ -84,28 +86,13 @@
                             <td>{{ solicitud.usuario.nombre_completo }}</td>
                             <td>{{ solicitud.fecha_separacion }}</td>
                             <td>{{ solicitud.hora_separacion }}</td>
-                            <td>{{ solicitud.hora_devolucion }}</td>
-                            <td>{{ solicitud.recurso_fisico }}</td>
-                            <td>
+                            <td class="hidden-480">{{ solicitud.hora_devolucion }}</td>
+                            <td class="hidden-480">{{ solicitud.recurso_fisico }}</td>
+                            <td class="hidden-480">
                                 {% for recurso in solicitud.recurso_tecnologico.all %}
                                 {{ recurso }}{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </td>
-{#                            <td>#}
-{#                                <div class="hidden-sm hidden-xs btn-group">#}
-{#                                    <button class="btn btn-xs btn-success">#}
-{#                                        <i class="ace-icon fa fa-check bigger-120"></i>#}
-{#                                    </button>#}
-{##}
-{#                                    <a href="{% url 'agendas.actualizar' solicitud.id %}" class="btn btn-xs btn-info">#}
-{#                                        <i class="ace-icon fa fa-pencil bigger-120"></i>#}
-{#                                    </a>#}
-{##}
-{#                                    <a href="{% url 'agendas.eliminar' solicitud.id %}" class="btn btn-xs btn-danger">#}
-{#                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </td>#}
                         </tr>
                     {% empty %}
                         <tr>
@@ -123,24 +110,13 @@
 {% block js_extra %}
     <script src="{% static 'nucleo/assets/js/bootstrap-datepicker.min.js' %}"></script>
     <script src="{% static 'nucleo/assets/js/bootstrap-timepicker.min.js' %}"></script>
-    <script src="{% static 'nucleo/assets/js/daterangepicker.min.js' %}"></script>
+    <script src="{% static 'nucleo/assets/js/moment.min.js' %}"></script>
     <script src="{% static 'nucleo/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
     <script src="{% static 'nucleo/assets/js/bootstrap-colorpicker.min.js' %}"></script>
 
 {% endblock %}
 
 {% block js_script %}
-    <script type="text/javascript">
-        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-    </script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!-- page specific plugin scripts -->
-
-    <!-- ace scripts -->
-    <script src="assets/js/ace-elements.min.js"></script>
-    <script src="assets/js/ace.min.js"></script>
-
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
         jQuery(function($) {

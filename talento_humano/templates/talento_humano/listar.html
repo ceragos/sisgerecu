@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block header %}
-    <div class="ace-settings-container" id="ace-settings-container">
-        <a href="{% url 'empleado.create' %}" class="btn btn-primary align-right">
-            <i class="ace-icon fa fa-flask align-top bigger-125"></i>
-            Registrar Personal
-        </a>
-    </div>
-
     <div class="page-header">
         <h1>
+            <a href="{% url 'empleado.create' %}"
+               class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
+                <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
+            </a>
+            <a href="{% url 'empleado.create' %}" class="btn btn-primary align-left hidden-xs">
+                Registrar
+            </a>
             Talento Humano
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -45,7 +45,7 @@
                         <th>Nombres</th>
                         <th class="hidden-480">Apellidos</th>
 
-                        <th>
+                        <th class="hidden-480">
                             <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
                             Celular
                         </th>
@@ -77,7 +77,7 @@
                             <td>{{ empleado.usuario.numero_documento }}</td>
                             <td>{{ empleado.usuario.first_name }}</td>
                             <td class="hidden-480">{{ empleado.usuario.last_name }}</td>
-                            <td>{{ empleado.usuario.celular }}</td>
+                            <td class="hidden-480">{{ empleado.usuario.celular }}</td>
 
                             <td class="hidden-480">
                                 {% if empleado.perfil.nombre == 'Docente' %}
@@ -111,15 +111,8 @@
 
                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                             <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                    <span class="blue">
-                                                        <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                                    </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <a href="{% url 'empleado.update' empleado.id %}"
+                                                   class="tooltip-success" data-rel="tooltip" title="Editar">
                                                     <span class="green">
                                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                                     </span>
@@ -127,7 +120,8 @@
                                             </li>
 
                                             <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                <a href="{% url 'empleado.delete' empleado.id %}"
+                                                   class="tooltip-error" data-rel="tooltip" title="Eliminar">
                                                     <span class="red">
                                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </span>
