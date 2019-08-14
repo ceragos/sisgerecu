@@ -1,5 +1,10 @@
 {% extends 'nucleo/base.html' %}
+{% load static %}
 {% block title %}Recursos Tecnologicos - G. R.{% endblock %}
+
+{% block plugin_css %}
+    <link rel="stylesheet" href="{% static 'nucleo/assets/css/colorbox.min.css' %}" />
+{% endblock %}
 
 {% block breadcrumb %}
     <li>
@@ -67,12 +72,48 @@
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
 
-                                    <button class="btn btn-xs btn-warning">
+                                    <a href="#my-modal{{ recurso.id }}" role="button" class="btn btn-xs btn-warning" data-toggle="modal">
                                         <i class="ace-icon fa fa-camera bigger-120"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
+
+                        <div id="my-modal{{ recurso.id }}" class="modal fade" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h3 class="smaller lighter blue no-margin">{{ recurso.nombre }}</h3>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div>
+                                            <ul class="ace-thumbnails clearfix">
+                                                {% for foto in recurso.galeria_rt.all %}
+                                                    <li>
+                                                        <a href="{{foto.imagen.url}}" data-rel="colorbox">
+                                                            <img width="150" height="150" alt="150x150"
+                                                                 src="{{foto.imagen.url}}" />
+                                                            <div class="text">
+                                                                <div class="inner">{{ foto }}</div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                                            <i class="ace-icon fa fa-times"></i>
+                                            Close
+                                        </button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
 
                     {% empty %}
                         <tr>
@@ -85,4 +126,64 @@
             </table>
         </div>
     </div>
+{% endblock %}
+
+
+{% block js_extra %}
+    <script src="{% static 'nucleo/assets/js/jquery.colorbox.min.js' %}"></script>
+{% endblock %}
+
+{% block js_script %}
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.modal.aside').ace_aside();
+
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+
+
+            //make content sliders resizable using jQuery UI (you should include jquery ui files)
+            //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition:true,
+                scalePhotos:true,
+                scrolling:false,
+                previous:'<i class="ace-icon fa fa-arrow-left"></i>',
+                next:'<i class="ace-icon fa fa-arrow-right"></i>',
+                close:'&times;',
+                current:'{current} of {total}',
+                maxWidth:'100%',
+                maxHeight:'100%',
+                onOpen:function(){
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed:function(){
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete:function(){
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                $('#colorbox, #cboxOverlay').remove();
+           });
+        })
+    </script>
 {% endblock %}
