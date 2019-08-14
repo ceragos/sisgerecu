@@ -1,4 +1,5 @@
 {% extends 'nucleo/base.html' %}
+{% load static %}
 {% block title %}Gestión de Recursos{% endblock %}
 
 {% block breadcrumb %}
@@ -9,6 +10,10 @@
 {% endblock %}
 
 {% block content %}
+    <br><br><br><br><br><br><br><br><br>
+    <div style="text-align: center; margin: 0 auto;">
+        <img src="{% static 'nucleo/assets/images/logo.png' %}" alt="">
+    </div>
 {% endblock %}
 
 {% block js_extra %}
