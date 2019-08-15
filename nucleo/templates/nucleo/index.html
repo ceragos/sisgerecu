@@ -10,9 +10,10 @@
 {% endblock %}
 
 {% block content %}
-    <br><br><br><br><br><br><br><br><br>
+    <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs"><br><br ><br><br><br><br>
     <div style="text-align: center; margin: 0 auto;">
-        <img src="{% static 'nucleo/assets/images/logo.png' %}" alt="">
+        <img class="hidden-lg hidden-sm" src="{% static 'nucleo/assets/images/logo_responsive.png' %}" alt="">
+        <img class="hidden-xs hidden-md" src="{% static 'nucleo/assets/images/logo.png' %}" alt="">
     </div>
 {% endblock %}
 
