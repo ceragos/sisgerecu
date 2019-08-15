@@ -15,15 +15,21 @@
 {% endblock %}
 
 {% block header %}
+    {% if request.user.empleado.perfil.nombre == 'Docente' %}
+        <div class="ace-settings-container hidden-xs" id="ace-settings-container">
+            <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-right">
+                <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
+                Agendar Recursos
+            </a>
+        </div>
+    {% endif %}
+
     <div class="page-header">
         <h1>
             {% if request.user.empleado.perfil.nombre == 'Docente' %}
                 <a href="{% url 'agendas.crear' %}"
                    class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
                     <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
-                </a>
-                <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-left hidden-xs">
-                    Anotar
                 </a>
             {% endif %}
             Agenda General

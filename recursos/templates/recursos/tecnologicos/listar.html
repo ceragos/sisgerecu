@@ -15,14 +15,18 @@
 {% endblock %}
 
 {% block header %}
+    <div class="ace-settings-container hidden-xs" id="ace-settings-container">
+        <a href="{% url 'recursos.tecnologicos.crear' %}" class="btn btn-primary align-right">
+            <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
+            Crear Recurso Tecnólogico
+        </a>
+    </div>
+
     <div class="page-header">
         <h1>
             <a href="{% url 'recursos.tecnologicos.crear' %}"
                class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
                 <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
-            </a>
-            <a href="{% url 'recursos.tecnologicos.crear' %}" class="btn btn-primary align-left hidden-xs">
-                Crear
             </a>
             Recursos Tecnologicos
             <small>
