@@ -1,6 +1,5 @@
 from datetime import date
 
-import dateutil
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import Q
