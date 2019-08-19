@@ -1,3 +1,4 @@
+from dateutil.utils import today
 from django.db import models
 from nucleo.models import MarcadorTiempo
 from recursos.models import RecursoFisico, RecursoTecnologico
@@ -12,7 +13,7 @@ class Agenda(MarcadorTiempo):
                                                  verbose_name='recurso tecnólogico', related_name='agenda_recurso',
                                                  help_text='Mantenga presionado "Control" o "Command" en un Mac, para '
                                                            'seleccionar más de una opción.')
-    fecha_separacion = models.DateField(null=False, blank=False, verbose_name='Fecha de Separación')
+    fecha_separacion = models.DateField(null=False, blank=False, verbose_name='Fecha de Separación', default=today())
     hora_separacion = models.TimeField(null=False, blank=False, verbose_name='Hora de Separación')
     hora_devolucion = models.TimeField(null=False, blank=False, verbose_name='Hora de Devolución')
 
@@ -21,4 +22,6 @@ class Agenda(MarcadorTiempo):
         verbose_name_plural = 'agendas'
 
     def __str__(self):
-        return self.usuario.nombre_completo
+        return 'Separado por {} el {} desde las {} hasta las {}'.format(self.usuario.nombre_completo,
+                                                                        self.fecha_separacion, self.hora_separacion,
+                                                                        self.hora_devolucion)

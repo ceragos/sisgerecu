@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime, date
 
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
