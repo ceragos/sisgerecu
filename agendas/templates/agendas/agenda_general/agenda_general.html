@@ -1,5 +1,6 @@
 {% extends 'nucleo/base.html' %}
 {% load static %}
+{% load formato_fecha %}
 {% block title %}Agenda General - G. R.{% endblock %}
 
 {% block plugin_css %}
@@ -96,8 +97,8 @@
                         <tr>
                             <td>{{ reserva.usuario.nombre_completo }}</td>
                             <td>{{ reserva.fecha_separacion }}</td>
-                            <td>{{ reserva.hora_separacion }}</td>
-                            <td class="hidden-480">{{ reserva.hora_devolucion }}</td>
+                            <td>{{ reserva.hora_separacion|formato_12_horas }}</td>
+                            <td class="hidden-480">{{ reserva.hora_devolucion|formato_12_horas }}</td>
                             <td class="hidden-480">
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a href="#my-modal-f{{ reserva.id }}" role="button" class="btn btn-xs btn-warning"

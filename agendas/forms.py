@@ -1,4 +1,6 @@
 from datetime import date
+
+import dateutil
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import Q
@@ -51,7 +53,10 @@ class AgendaForm(forms.ModelForm):
         for agenda in agenda_dia:
             if recurso_fisico == agenda.recurso_fisico:
                 raise ValidationError('El {} ya fue agendado desde las {} hasta las {} por {}'.format(
-                    recurso_fisico, agenda.hora_separacion, agenda.hora_devolucion, agenda.usuario))
+                    recurso_fisico,
+                    agenda.hora_separacion.strftime('%I:%M %p'),
+                    agenda.hora_devolucion.strftime('%I:%M %p'),
+                    agenda.usuario))
 
         return recurso_fisico
 
@@ -69,7 +74,10 @@ class AgendaForm(forms.ModelForm):
             for recurso in recurso_tecnologico:
                 if recurso in agenda.recurso_tecnologico.all():
                     raise ValidationError('El {} ya fue agendado desde las {} hasta las {} por {}'.format(
-                        recurso, agenda.hora_separacion, agenda.hora_devolucion, agenda.usuario))
+                        recurso,
+                        agenda.hora_separacion.strftime('%I:%M %p'),
+                        agenda.hora_devolucion.strftime('%I:%M %p'),
+                        agenda.usuario))
 
         return recurso_tecnologico
 
