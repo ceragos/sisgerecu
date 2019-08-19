@@ -54,10 +54,12 @@
                     <div class="row">
                         <div class="col-xs-8 col-sm-11">
                             <div class="input-group">
+                                {{ form.errors }}
                                 <input class="form-control date-picker"
                                        name="fecha" id="id-date-picker-1"
                                        type="text" data-date-format="dd-mm-yyyy"
                                        autocomplete="off"
+                                       value="{{ request.GET.fecha }}"
                                 />
                                 <span class="input-group-addon">
                                     <i class="fa fa-calendar bigger-110"></i>
