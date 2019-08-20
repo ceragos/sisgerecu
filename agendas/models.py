@@ -10,9 +10,7 @@ class Agenda(MarcadorTiempo):
     recurso_fisico = models.ForeignKey(RecursoFisico, null=False, blank=False, verbose_name='recurso físico',
                                        on_delete=models.PROTECT)
     recurso_tecnologico = models.ManyToManyField(RecursoTecnologico, blank=True,
-                                                 verbose_name='recurso tecnólogico', related_name='agenda_recurso',
-                                                 help_text='Mantenga presionado "Control" o "Command" en un Mac, para '
-                                                           'seleccionar más de una opción.')
+                                                 verbose_name='recurso tecnólogico', related_name='agenda_recurso')
     fecha_separacion = models.DateField(null=False, blank=False, verbose_name='Fecha de Separación', default=today())
     hora_separacion = models.TimeField(null=False, blank=False, verbose_name='Hora de Separación')
     hora_devolucion = models.TimeField(null=False, blank=False, verbose_name='Hora de Devolución')

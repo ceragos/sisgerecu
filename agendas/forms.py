@@ -18,7 +18,7 @@ class AgendaForm(forms.ModelForm):
         fields = ['fecha_separacion', 'hora_separacion', 'hora_devolucion', 'recurso_fisico', 'recurso_tecnologico']
         widgets = {
             'recurso_fisico': forms.Select(attrs={'class': 'form-control'}),
-            'recurso_tecnologico': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'recurso_tecnologico': forms.SelectMultiple(attrs={'class': 'form-control select2'}),
             'fecha_separacion': forms.SelectDateWidget(attrs={'class': 'form-control',
                                                               'style': 'display: inline; width: 32.8%;'},
                                                        years=range(date.today().year,

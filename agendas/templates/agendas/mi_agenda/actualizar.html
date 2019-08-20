@@ -1,5 +1,10 @@
 {% extends 'nucleo/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+
+{% block plugin_css %}
+    <link rel="stylesheet" href="{% static 'nucleo/assets/css/select2.min.css' %}" />
+{% endblock %}
 
 {% block title %}Actualizar Mi Agenda - G. R.{% endblock %}
 
@@ -32,4 +37,35 @@
             <a href="{% url 'mi_agenda.listar' %}" class="btn btn-default">Cancelar</a>
         </form>
     </div>
+{% endblock %}
+
+
+{% block js_extra %}
+    <script src="{% static 'nucleo/assets/js/select2.min.js' %}"></script>
+{% endblock %}
+
+{% block js_script %}
+    <script>
+        jQuery(function ($) {
+            //////////////////
+            //select2
+            $('.select2').css('width', '200px').select2({allowClear: true})
+            $('#select2-multiple-style .btn').on('click', function (e) {
+                var target = $(this).find('input[type=radio]');
+                var which = parseInt(target.val());
+                if (which == 2) $('.select2').addClass('tag-input-style');
+                else $('.select2').removeClass('tag-input-style');
+            });
+
+            //////////////////
+
+            //in ajax mode, remove remaining elements before leaving page
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('[class*=select2]').remove();
+                $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox('destroy');
+                $('.rating').raty('destroy');
+                $('.multiselect').multiselect('destroy');
+            });
+        });
+    </script>
 {% endblock %}
