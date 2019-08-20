@@ -45,10 +45,16 @@ class AgendaForm(forms.ModelForm):
         hora_separacion = self.cleaned_data['hora_separacion']
         hora_devolucion = self.cleaned_data['hora_devolucion']
 
+        # Consulta de los elementos existentes en el mismo horario
         agenda_dia = Agenda.objects.filter(fecha_separacion=fecha_separacion)
         agenda_dia = agenda_dia.filter(Q(hora_separacion__range=(hora_separacion, hora_devolucion))
                                        | Q(hora_devolucion__range=(hora_separacion, hora_devolucion)))
 
+        # Validación realizada para excluir si es una instancia de si misma, y así queda habilitada para hacer edición
+        if self.instance:
+            agenda_dia = agenda_dia.exclude(pk=self.instance.pk)
+
+        # Validación de disponibilidad
         for agenda in agenda_dia:
             if recurso_fisico == agenda.recurso_fisico:
                 raise ValidationError('El {} ya fue agendado desde las {} hasta las {} por {}'.format(
@@ -65,10 +71,16 @@ class AgendaForm(forms.ModelForm):
         hora_separacion = self.cleaned_data['hora_separacion']
         hora_devolucion = self.cleaned_data['hora_devolucion']
 
+        # Consulta de los elementos existentes en el mismo horario
         agenda_dia = Agenda.objects.filter(fecha_separacion=fecha_separacion)
         agenda_dia = agenda_dia.filter(Q(hora_separacion__range=(hora_separacion, hora_devolucion))
                                        | Q(hora_devolucion__range=(hora_separacion, hora_devolucion)))
 
+        # Validación realizada para excluir si es una instancia de si misma, y así queda habilitada para hacer edición
+        if self.instance:
+            agenda_dia = agenda_dia.exclude(pk=self.instance.pk)
+
+        # Validación de disponibilidad
         for agenda in agenda_dia:
             for recurso in recurso_tecnologico:
                 if recurso in agenda.recurso_tecnologico.all():
