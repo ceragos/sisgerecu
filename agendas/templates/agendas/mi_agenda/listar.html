@@ -104,12 +104,14 @@
                                 {{ reserva.recurso_fisico }}
                             </td>
                             <td class="hidden-480">
+                            {% if reserva.recurso_tecnologico.all %}
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a href="#my-modal-t{{ reserva.id }}" role="button" class="btn btn-xs btn-warning"
                                        data-toggle="modal">
                                         <i class="ace-icon fa fa-camera bigger-120"></i>
                                     </a>
                                 </div>
+                            {% endif %}
                                 {% for recurso in reserva.recurso_tecnologico.all %}
                                     {{ recurso }} {% if not forloop.last %},{% endif %}
                                 {% endfor %}
