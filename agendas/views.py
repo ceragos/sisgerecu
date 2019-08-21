@@ -57,7 +57,9 @@ class MiAgendaCreateView(CreateView):
     model = Agenda
     form_class = AgendaForm
     template_name = 'agendas/mi_agenda/crear.html'
-    success_url = reverse_lazy('mi_agenda.listar')
+
+    def get_success_url(self):
+        return reverse_lazy('mi_agenda.listar') + '?create_ok'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -70,7 +72,9 @@ class MiAgendaUpdateView(UpdateView):
     model = Agenda
     form_class = AgendaForm
     template_name = 'agendas/mi_agenda/actualizar.html'
-    success_url = reverse_lazy('mi_agenda.listar')
+
+    def get_success_url(self):
+        return reverse_lazy('mi_agenda.listar') + '?edit_ok'
 
 
 class MiAgendaDeleteView(DeleteView):
