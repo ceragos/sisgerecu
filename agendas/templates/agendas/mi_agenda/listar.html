@@ -167,7 +167,7 @@
                                             <ul class="ace-thumbnails clearfix">
                                                 {% for foto in reserva.recurso_fisico.galeria_rf.all %}
                                                     <li>
-                                                        <a href="{{foto.imagen.url}}" data-rel="colorbox">
+                                                        <a data-rel="colorbox">
                                                             <img width="150" height="150" alt="150x150"
                                                                  src="{{foto.imagen.url}}" />
                                                             <div class="text">
@@ -208,7 +208,7 @@
                                             {% for recurso in reserva.recurso_tecnologico.all %}
                                                 {% for foto in recurso.galeria_rt.all %}
                                                     <li>
-                                                        <a href="{{foto.imagen.url}}" data-rel="colorbox">
+                                                        <a data-rel="colorbox">
                                                             <img width="150" height="150" alt="150x150"
                                                                  src="{{foto.imagen.url}}" />
                                                             <div class="text">
@@ -284,39 +284,6 @@
             .next().on(ace.click_event, function(){
                 $(this).prev().focus();
             });
-
-            //galeria plugin
-            var $overflow = '';
-            var colorbox_params = {
-                rel: 'colorbox',
-                reposition:true,
-                scalePhotos:true,
-                scrolling:false,
-                previous:'<i class="ace-icon fa fa-arrow-left"></i>',
-                next:'<i class="ace-icon fa fa-arrow-right"></i>',
-                close:'&times;',
-                current:'{current} de {total}',
-                maxWidth:'500px',
-                maxHeight:'500px',
-                onOpen:function(){
-                    $overflow = document.body.style.overflow;
-                    document.body.style.overflow = 'hidden';
-                },
-                onClosed:function(){
-                    document.body.style.overflow = $overflow;
-                },
-                onComplete:function(){
-                    $.colorbox.resize();
-                }
-            };
-
-            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
-
-
-            $(document).one('ajaxloadstart.page', function(e) {
-                $('#colorbox, #cboxOverlay').remove();
-           });
         })
     </script>
 {% endblock %}
