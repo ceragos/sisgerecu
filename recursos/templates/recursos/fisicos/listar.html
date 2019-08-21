@@ -15,12 +15,14 @@
 {% endblock %}
 
 {% block header %}
+    {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
     <div class="ace-settings-container hidden-xs" id="ace-settings-container">
         <a href="{% url 'recursos.fisicos.crear' %}" class="btn btn-primary align-right">
             <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
             Crear Recurso Físico
         </a>
     </div>
+    {% endif %}
 
     <div class="page-header">
         <h1>
@@ -49,7 +51,9 @@
                         <th class="hidden-480">Capacidad</th>
                         <th class="hidden-480">Caracteristicas</th>
                         <th class="hidden-480">Contenido</th>
+                        {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                         <th></th>
+                        {% endif %}
                     </tr>
                 </thead>
 
@@ -61,6 +65,7 @@
                             <td class="hidden-480">{{ recurso.capacidad }} personas</td>
                             <td class="hidden-480">{{ recurso.caracteristicas }}</td>
                             <td class="hidden-480">{{ recurso.contenido }}</td>
+                            {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a href="{% url 'recursos.fisicos.actualizar' recurso.id %}" class="btn btn-xs btn-info">
@@ -113,6 +118,7 @@
                                     </div>
                                 </div>
                             </td>
+                            {% endif %}
                         </tr>
 
                         <div id="my-modal{{ recurso.id }}" class="modal fade" tabindex="-1">

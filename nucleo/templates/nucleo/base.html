@@ -288,7 +288,7 @@
 					</li>
                     {% endif %}
 
-					{% if request.user.empleado.perfil.nombre == 'Administrativo' %}
+					{% if request.user.empleado.perfil.nombre != 'Servicios Generales' %}
                     <li class="{% if request.path|slice:":10" == '/recursos/' %}active open{% endif %}">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
