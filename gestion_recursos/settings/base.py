@@ -25,7 +25,8 @@ SECRET_KEY = 'hr8lwn77ple_s@x95(x!#(w_ka*1$$=$v9@20=3pa&0k1&g@!)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['sisgerecu.pythonanywhere.com', 'localhost', '127.0.0.1']
+# 'sisgerecu.pythonanywhere.com', 'localhost', '127.0.0.1'
+ALLOWED_HOSTS = ['sisgerecu.pythonanywhere.com']
 
 # Application definition
 
