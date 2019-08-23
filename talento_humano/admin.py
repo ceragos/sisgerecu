@@ -7,23 +7,21 @@ from django.contrib import admin
 from .models import Empleado, Perfil, CarrreraProfesional, TituloObtenido
 
 
+@admin.register(Empleado)
 class EmpleadoAdmin(admin.ModelAdmin):
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 
+@admin.register(TituloObtenido)
 class TituloObtenidoAdmin(admin.ModelAdmin):
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 
+@admin.register(CarrreraProfesional)
 class CarrreraProfesionalAdmin(admin.ModelAdmin):
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
 
 
+@admin.register(Perfil)
 class PerfilAdmin(admin.ModelAdmin):
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']
-
-
-admin.site.register(Empleado, EmpleadoAdmin)
-admin.site.register(TituloObtenido, TituloObtenidoAdmin)
-admin.site.register(CarrreraProfesional, CarrreraProfesionalAdmin)
-admin.site.register(Perfil, PerfilAdmin)

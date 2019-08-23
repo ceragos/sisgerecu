@@ -14,6 +14,7 @@ ESTADO_RESERVA_CHOICES = (
 
 
 class Agenda(MarcadorTiempo):
+    """ ALmacena la agenda programada por los docentes. """
     usuario = models.ForeignKey(User, null=True, blank=True, verbose_name='User', on_delete=models.PROTECT)
     recurso_fisico = models.ForeignKey(RecursoFisico, null=False, blank=False, verbose_name='recurso físico',
                                        on_delete=models.PROTECT)
@@ -32,11 +33,21 @@ class Agenda(MarcadorTiempo):
                                                                         self.fecha_separacion, self.hora_separacion,
                                                                         self.hora_devolucion)
 
+    def save(self, *args, **kwargs):
+        minuta = Minuta()
+        minuta.reserva = self
+        minuta.save()
+        return super(Agenda, self).save(*args, **kwargs)
+
 
 class Minuta(MarcadorTiempo):
-    reserva = models.ForeignKey(Agenda, null=False, blank=False, verbose_name='reserva en la agenda',
-                                related_name='reserva_agenda', on_delete=models.PROTECT)
+    """ Almacena la información que considera necesaria el personal de servicios generales. """
+    reserva = models.OneToOneField(Agenda, null=False, blank=False, verbose_name='reserva en la agenda',
+                                   related_name='reserva_agenda', on_delete=models.PROTECT)
     estado = models.CharField(max_length=1, blank=False, null=False, choices=ESTADO_RESERVA_CHOICES,
                               verbose_name='estado', default='P')
     observacion = models.TextField(null=True, blank=True, verbose_name='observacion')
-    encargado = models.ForeignKey(User, null=False, blank=False, verbose_name='encargado', on_delete=models.PROTECT)
+    encargado = models.ForeignKey(User, null=True, blank=True, verbose_name='encargado', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.reserva
