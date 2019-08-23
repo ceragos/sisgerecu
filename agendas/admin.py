@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from agendas.models import Agenda
+from agendas.models import Agenda, Minuta
 
 
 @admin.register(Agenda)
@@ -11,3 +11,9 @@ class AgendasAdmin(admin.ModelAdmin):
 
     def nombre_completo(self, obj):
         return obj.usuario.nombre_completo
+
+
+@admin.register(Minuta)
+class MinutaAdmin(admin.ModelAdmin):
+    list_display = ('reserva', 'encargado', 'fecha_creacion', 'fecha_modificacion')
+    readonly_fields = ['fecha_creacion', 'fecha_modificacion']
