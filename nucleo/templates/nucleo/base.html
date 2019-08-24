@@ -79,13 +79,13 @@
 						<li class="green dropdown-modal">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">{{ request.user.destinatario_usuario|contador }}</span>
+								<span class="badge badge-success">{{ request.user.destinatario_usuario|comunicaciones_no_leidas }}</span>
 							</a>
 
 							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="ace-icon fa fa-envelope-o"></i>
-									{{ request.user.destinatario_usuario|contador }} Mensajes
+									{{ request.user.destinatario_usuario|comunicaciones_no_leidas }} Mensajes
 								</li>
 
 								<li class="dropdown-content">
@@ -114,8 +114,8 @@
 								</li>
 
 								<li class="dropdown-footer">
-									<a href="inbox.html">
-										See all messages
+									<a href="{% url 'comunicacion.listar' %}">
+										Ver todos los mensajes
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
 								</li>
