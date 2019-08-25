@@ -41,7 +41,7 @@
                                                 {% if mensaje.fecha_creacion|date == hoy|date %}
                                                     {{ mensaje.fecha_creacion|time }}
                                                 {% else %}
-                                                    {{ mensaje.fecha_creacion|timesince }}.
+                                                    {{ mensaje.fecha_creacion|timesince }}
                                                 {% endif %}
                                             </span>
 
