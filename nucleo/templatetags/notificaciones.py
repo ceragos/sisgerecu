@@ -4,5 +4,5 @@ register = Library()
 
 
 @register.filter
-def contador(objeto):
+def comunicaciones_no_leidas(objeto):
     return objeto.filter(estado=False).count()

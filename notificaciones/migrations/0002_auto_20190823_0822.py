@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='comunicacioninterna',
-            options={'ordering': ['fecha_creacion'], 'verbose_name': 'comunicación interna', 'verbose_name_plural': 'comunicaciones internas'},
+            options={'ordering': ['fecha_creacion'], 'verbose_name': 'comunicación interna', 'verbose_name_plural': 'comunicacion_interna internas'},
         ),
         migrations.AddField(
             model_name='comunicacioninterna',

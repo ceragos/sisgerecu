@@ -20,7 +20,7 @@
 
 {% block header %}
     {% if request.user.empleado.perfil.nombre == 'Docente' %}
-        <div class="ace-settings-container hidden-xs" id="ace-settings-container">
+        <div class="pull-right hidden-xs" id="ace-settings-container">
             <a href="{% url 'agendas.crear' %}" class="btn btn-primary align-right">
                 <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
                 Agendar Recursos
@@ -219,29 +219,19 @@
 
                                         <div class="col-xs-12 col-sm-3">
                                             <div class="space visible-xs"></div>
-                                            <h4 class="header blue lighter less-margin">Enviar mensaje a {{ reserva.usuario.first_name }}</h4>
+                                            <h4 class="header less-margin">Enviar mensaje a {{ reserva.usuario.first_name }}</h4>
 
                                             <div class="space-6"></div>
 
-                                            <form>
-                                                <fieldset>
-                                                    <textarea class="width-100" resize="none" placeholder="Escribe tu mensaje…"></textarea>
-                                                </fieldset>
+                                            <div class="li-new-mail">
+                                                <a href="{% url 'comunicacion.crear' reserva.id %}" class="btn-new-mail">
+                                                    <span class="btn btn-primary no-border">
+                                                        <i class="ace-icon fa fa-envelope bigger-130"></i>
+                                                        <span class="bigger-110">Contactar</span>
+                                                    </span>
+                                                </a>
+                                            </div>
 
-                                                <div class="hr hr-dotted"></div>
-
-                                                <div class="clearfix">
-                                                    <label class="pull-left">
-                                                        <input type="checkbox" class="ace" />
-                                                        <span class="lbl"> Email me a copy</span>
-                                                    </label>
-
-                                                    <button class="pull-right btn btn-sm btn-primary btn-white btn-round" type="button">
-                                                        Enviar
-                                                        <i class="ace-icon fa fa-arrow-right icon-on-right bigger-110"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -14,8 +14,9 @@ ESTADO_RESERVA_CHOICES = (
 
 
 class Agenda(MarcadorTiempo):
-    """ ALmacena la agenda programada por los docentes. """
-    usuario = models.ForeignKey(User, null=True, blank=True, verbose_name='User', on_delete=models.PROTECT)
+    """ Almacena la agenda programada por los docentes. """
+    usuario = models.ForeignKey(User, null=True, blank=True, verbose_name='User', on_delete=models.PROTECT,
+                                related_name='usuario_agenda')
     recurso_fisico = models.ForeignKey(RecursoFisico, null=False, blank=False, verbose_name='recurso físico',
                                        on_delete=models.PROTECT)
     recurso_tecnologico = models.ManyToManyField(RecursoTecnologico, blank=True,
