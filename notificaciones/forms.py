@@ -19,6 +19,7 @@ class ComunicacionInternaForm(forms.ModelForm):
         super(ComunicacionInternaForm, self).__init__(*args, **kwargs)
 
     def clean_remitente(self):
+        self.instance.estado = True
         return self.user
 
     def clean_destinatario(self):
