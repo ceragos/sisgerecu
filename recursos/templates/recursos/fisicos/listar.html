@@ -16,7 +16,7 @@
 
 {% block header %}
     {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
-    <div class="ace-settings-container hidden-xs" id="ace-settings-container">
+    <div class="pull-right hidden-xs" id="ace-settings-container">
         <a href="{% url 'recursos.fisicos.crear' %}" class="btn btn-primary align-right">
             <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
             Crear Recurso Físico
@@ -51,9 +51,7 @@
                         <th class="hidden-480">Capacidad</th>
                         <th class="hidden-480">Caracteristicas</th>
                         <th class="hidden-480">Contenido</th>
-                        {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
-                        <th></th>
-                        {% endif %}
+                        <th>Opciones</th>
                     </tr>
                 </thead>
 
@@ -65,9 +63,9 @@
                             <td class="hidden-480">{{ recurso.capacidad }} personas</td>
                             <td class="hidden-480">{{ recurso.caracteristicas }}</td>
                             <td class="hidden-480">{{ recurso.contenido }}</td>
-                            {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
+                                    {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                                     <a href="{% url 'recursos.fisicos.actualizar' recurso.id %}" class="btn btn-xs btn-info">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
@@ -75,7 +73,7 @@
                                     <a href="{% url 'recursos.fisicos.eliminar' recurso.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
-
+                                    {% endif %}
                                     <a href="#my-modal{{ recurso.id }}" role="button" class="btn btn-xs btn-warning" data-toggle="modal">
                                         <i class="ace-icon fa fa-camera bigger-120"></i>
                                     </a>
@@ -96,7 +94,7 @@
                                                     </span>
                                                 </a>
                                             </li>
-
+                                        {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                                             <li>
                                                 <a href="{% url 'recursos.fisicos.actualizar' recurso.id %}"
                                                    class="tooltip-success" data-rel="tooltip" title="Editar">
@@ -114,11 +112,11 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                        {% endif %}
                                         </ul>
                                     </div>
                                 </div>
                             </td>
-                            {% endif %}
                         </tr>
 
                         <div id="my-modal{{ recurso.id }}" class="modal fade" tabindex="-1">

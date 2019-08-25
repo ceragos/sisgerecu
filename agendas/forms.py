@@ -28,7 +28,6 @@ class AgendaForm(forms.ModelForm):
         }
 
     def clean_hora_devolucion(self):
-        print(self.cleaned_data)
         hora_separacion = self.cleaned_data['hora_separacion']
         hora_devolucion = self.cleaned_data['hora_devolucion']
 
