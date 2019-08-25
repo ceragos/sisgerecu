@@ -15,7 +15,7 @@
                                     <div class="message-infobar" id="id-message-infobar">
                                         <span class="blue bigger-150">Comunicaciones</span>
                                         <span class="grey bigger-110">
-                                            ({{ comunicacion|comunicaciones_no_leidas }} Mensajes no leidos)
+                                            ({{ request.user.destinatario_usuario|comunicaciones_no_leidas }} Mensajes no leidos)
                                         </span>
                                     </div>
                                 </div>
