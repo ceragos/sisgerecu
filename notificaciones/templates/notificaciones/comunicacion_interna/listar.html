@@ -24,7 +24,7 @@
                             <div class="message-list-container">
                                 <div class="message-list" id="message-list">
                                     {% for mensaje in comunicacion %}
-                                        <div class="message-item {% if not mensaje.estado %}message-unread{% endif %}">
+                                        <div class="message-item {% if not mensaje.estado and mensaje.destinatario == request.user %}message-unread{% endif %}">
 
                                             {% if mensaje.destinatario == request.user %}
                                                 <span class="sender" title="{{ mensaje.remitente }}">
