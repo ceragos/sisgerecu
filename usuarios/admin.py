@@ -10,7 +10,8 @@ class CustomUserAdmin(UserAdmin):
     def __init__(self, *args, **kwargs):
         super(UserAdmin, self).__init__(*args, **kwargs)
 
-        UserAdmin.fieldsets = list(UserAdmin.fieldsets) + [(None, {'fields': ('numero_documento', 'celular')})]
+        UserAdmin.fieldsets = list(UserAdmin.fieldsets) + [(None, {'fields': ('foto_perfil','numero_documento',
+                                                                              'celular')})]
 
         # UserAdmin.list_display = list(UserAdmin.list_display) + ['numero_documento', 'celular']
 

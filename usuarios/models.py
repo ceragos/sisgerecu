@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
+    foto_perfil = models.ImageField(upload_to='usuarios/perfil', null=True, blank=True, verbose_name='foto de perfil')
     numero_documento = models.CharField(null=True, blank=False, verbose_name='numero de documento', max_length=40)
     celular = models.CharField(null=False, blank=False, verbose_name='celular', max_length=40)
     codigo_verificacion = models.CharField(null=True, blank=True, verbose_name='codigo de verificación', max_length=4)
