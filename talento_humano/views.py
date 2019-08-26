@@ -7,11 +7,11 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from talento_humano.forms import EmpleadoForm
+from talento_humano.forms import EmpleadoForm, PerfilForm
 from talento_humano.models import Empleado
 
 # Create your views here.
-from usuarios.forms import CrearUsuarioForm, ActualizarUsuarioForm
+from usuarios.forms import CrearUsuarioForm, ActualizarUsuarioForm, PerfilUsuarioForm
 from usuarios.models import User
 
 
@@ -99,3 +99,44 @@ class EmpleadoDeleteView(DeleteView):
     model = Empleado
     template_name = 'talento_humano/eliminar.html'
     success_url = reverse_lazy('empleado.list')
+
+
+class PerfilUpdateView(UpdateView):
+    model = Empleado
+    model_user = User
+    form_class = PerfilForm
+    form_class_user = PerfilUsuarioForm
+    template_name = 'talento_humano/perfil.html'
+
+    def get_object(self, queryset=None):
+        return Empleado.objects.get(usuario=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(PerfilUpdateView, self).get_context_data(**kwargs)
+        empleado = self.get_object()
+        usuario = self.model_user.objects.get(id=empleado.usuario_id)
+        if 'form' not in context:
+            context['form'] = self.form_class()
+        if 'form_user' not in context:
+            context['form_user'] = self.form_class_user(instance=usuario)
+        context['id'] = empleado.pk
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        empleado = self.get_object()
+        usuario = self.model_user.objects.get(id=empleado.usuario_id)
+        form = self.form_class(request.POST, instance=empleado)
+        form_user = self.form_class_user(request.POST, instance=usuario)
+        print(form_user)
+        if form.is_valid() and form_user.is_valid():
+            # empleado = form.save(commit=False)
+            # empleado.usuario = form_user.save()
+            form_user.save()
+            empleado.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form, form_user=form_user))
+
+    def get_success_url(self):
+        return reverse_lazy('perfil') + '?ok'

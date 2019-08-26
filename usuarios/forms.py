@@ -45,3 +45,12 @@ class ActualizarUsuarioForm(UserChangeForm):
     class Meta:
         model = User
         fields = ('numero_documento', 'first_name', 'last_name', 'celular', 'email', 'username', 'groups')
+
+
+class PerfilUsuarioForm(UserChangeForm):
+    # para que no habilite el cambio de contraseña en el formulario frontend
+    password = None
+
+    class Meta:
+        model = User
+        fields = ('foto_perfil', 'first_name', 'last_name', 'celular', 'email')

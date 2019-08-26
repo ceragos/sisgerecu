@@ -21,3 +21,10 @@ class EmpleadoForm(forms.ModelForm):
             'carrera_profesional': forms.Select(attrs={'class': 'form-control'}),
             'perfil': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+class PerfilForm(forms.ModelForm):
+
+    class Meta:
+        model = Empleado
+        fields = ['titulo_obtenido', 'carrera_profesional']
