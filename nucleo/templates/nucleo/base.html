@@ -124,7 +124,14 @@
 
 						<li class="dark-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{% static 'nucleo/assets/images/avatars/avatar2.png' %}" alt="Jason's Photo" />
+
+                                    <img class="nav-user-photo" alt="{{ request.user }}"
+                                         {% if request.user.foto_perfil %}
+                                            src="{{ request.user.foto_perfil.url }}"
+                                         {% else %}
+                                            src="{% static 'nucleo/assets/images/avatars/avatar2.png' %}"
+                                         {% endif %}
+                                    />
 								<span class="user-info">
 									<small>Bienvenido,</small>
 									{{ request.user.first_name }}

@@ -52,9 +52,29 @@
                                             <i class="ace-icon fa fa-star orange2"></i>
 
                                             &nbsp;
-                                            <img class="middle" alt="John's Avatar" src="{% static 'nucleo/assets/images/avatars/avatar.png' %}" width="32" />
-                                            &nbsp;
-                                            <a class="sender">{{ mensaje.remitente }}</a>
+                                            <img class="middle" alt="John's Avatar" width="32"
+                                                 {% if mensaje.remitente == request.user %}
+                                                    {% if mensaje.destinatario.foto_perfil %}
+                                                        src="{{ mensaje.destinatario.foto_perfil.url }}"
+                                                    {% else %}
+                                                        src="{% static 'nucleo/assets/images/avatars/avatar.png' %}"
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if mensaje.remitente.foto_perfil %}
+                                                        src="{{ mensaje.remitente.foto_perfil.url }}"
+                                                    {% else %}
+                                                        src="{% static 'nucleo/assets/images/avatars/avatar.png' %}"
+                                                    {% endif %}
+                                                {% endif %}
+
+                                            />
+                                            <a class="sender">
+                                                {% if mensaje.remitente == request.user %}
+                                                    {{ mensaje.destinatario }}
+                                                {% else %}
+                                                    {{ mensaje.remitente }}
+                                                {% endif %}
+                                            </a>
 
                                             &nbsp;
                                             <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>

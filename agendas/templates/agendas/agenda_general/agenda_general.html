@@ -142,7 +142,13 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-2">
                                             <div class="text-center">
-                                                <img height="150" class="thumbnail inline no-margin-bottom" alt="Domain Owner's Avatar" src="{% static 'nucleo/assets/images/avatars/profile-pic.jpg' %}" />
+                                                <img height="150" class="thumbnail inline no-margin-bottom" alt="{{ reserva.usuario }}"
+                                                     {% if reserva.usuario.foto_perfil %}
+                                                        src="{{ reserva.usuario.foto_perfil.url }}"
+                                                     {% else %}
+                                                        src="{% static 'nucleo/assets/images/avatars/profile-pic.jpg' %}"
+                                                     {% endif %}
+                                                />
                                                 <br />
                                                 <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
                                                     <div class="inline position-relative">
