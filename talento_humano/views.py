@@ -127,11 +127,8 @@ class PerfilUpdateView(UpdateView):
         empleado = self.get_object()
         usuario = self.model_user.objects.get(id=empleado.usuario_id)
         form = self.form_class(request.POST, instance=empleado)
-        form_user = self.form_class_user(request.POST, instance=usuario)
-        print(form_user)
+        form_user = self.form_class_user(request.POST, request.FILES, instance=usuario)
         if form.is_valid() and form_user.is_valid():
-            # empleado = form.save(commit=False)
-            # empleado.usuario = form_user.save()
             form_user.save()
             empleado.save()
             return HttpResponseRedirect(self.get_success_url())
