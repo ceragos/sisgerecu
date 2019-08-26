@@ -1,7 +1,6 @@
 from dateutil.utils import today
-from django.db.models import Q
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from agendas.models import Agenda
 from notificaciones.forms import ComunicacionInternaForm
@@ -20,8 +19,12 @@ class ComunicacionInternaListView(ListView):
 
     def get_queryset(self):
         queryset = super(ComunicacionInternaListView, self).get_queryset()
-        return queryset.filter(Q(reserva__usuario=self.request.user) | Q(remitente=self.request.user))\
-            .order_by('-fecha_creacion')
+        f = self.request.GET['f']
+        if f == 'inbox':
+            queryset = queryset.filter(destinatario=self.request.user)
+        elif f == 'send':
+            queryset = queryset.filter(remitente=self.request.user)
+        return queryset.order_by('-fecha_creacion')
 
 
 class ComunicacionInternaCreateView(CreateView):
@@ -49,3 +52,17 @@ class ComunicacionInternaCreateView(CreateView):
         print('invalido')
         from django.http import HttpResponse
         return HttpResponse(form.cleaned_data)
+
+
+class ComunicacionInternaDetailView(DetailView):
+    model = ComunicacionInterna
+    template_name = 'notificaciones/comunicacion_interna/detalle.html'
+    context_object_name = 'mensaje'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mensaje = self.object
+        if mensaje.destinatario == self.request.user:
+            mensaje.estado = True
+            mensaje.save()
+        return context

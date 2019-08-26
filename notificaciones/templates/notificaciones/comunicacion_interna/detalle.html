@@ -25,67 +25,57 @@
                 <div class="tab-content no-border no-padding">
                     <div id="inbox" class="tab-pane in active">
                         <div class="message-container">
-                            <div id="id-message-list-navbar" class="message-navbar clearfix">
+                            <div id="id-message-item-navbar" class="message-navbar clearfix">
+                                <div>
+                                    <div class="messagebar-item-left">
+                                        <a href="{% url 'comunicacion.listar' %}?f=inbox" class="">
+                                            <i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i>
+                                            <b class="bigger-110 middle">Back</b>
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="message-bar">
                                     <div class="message-infobar" id="id-message-infobar">
                                         <span class="blue bigger-150">Comunicaciones</span>
-                                        <span class="grey bigger-110">
-                                            ({{ request.user.destinatario_usuario|comunicaciones_no_leidas }} Mensajes no leidos)
-                                        </span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="message-list-container">
-                                <div class="message-list" id="message-list">
-                                    {% for mensaje in comunicacion %}
-                                                                {# valida si el estado del mensaje es False y si el destinatario es el usuario #}
-                                        <div class="message-item {% if not mensaje.estado and mensaje.destinatario == request.user %}message-unread{% endif %}">
-                                            {% if mensaje.destinatario == request.user %}
-                                                <span class="sender" title="Recibido de {{ mensaje.remitente }}">
-                                                    <i class="ace-icon fa fa-mail-forward blue icon-only bigger-130"></i>
-                                                    <a href="{% url 'comunicacion.detalle' mensaje.id %}">
-                                                    {{ mensaje.remitente }}
-                                                    </a>
-                                                </span>
-                                            {% else %}
-                                                <span class="sender" title="Enviado a {{ mensaje.destinatario }}">
-                                                    <i class="ace-icon fa fa-reply green icon-only bigger-130"></i>
-                                                    <a href="{% url 'comunicacion.detalle' mensaje.id %}">
-                                                    {{ mensaje.destinatario }}
-                                                    </a>
-                                                </span>
-                                            {% endif %}
-                                            <span class="time">
-                                                {% if mensaje.fecha_creacion|date == hoy|date %}
-                                                    {{ mensaje.fecha_creacion|time }}
-                                                {% else %}
-                                                    {{ mensaje.fecha_creacion|timesince }}
-                                                {% endif %}
-                                            </span>
+                                <div class="message-content" id="id-message-content">
+                                    <div class="message-header clearfix">
+                                        <div class="pull-left">
+                                            <span class="blue bigger-125">Reserva del {{ mensaje.reserva.fecha_separacion }}</span>
 
-                                            <span class="summary">
-                                                <a href="{% url 'comunicacion.detalle' mensaje.id %}">
-                                                <span class="text">
-                                                    Reserva del {{ mensaje.reserva.fecha_separacion }}
-                                                </span>
-                                                </a>
-                                            </span>
+                                            <div class="space-4"></div>
 
-                                            <span class="summary">
-                                                <a href="{% url 'comunicacion.detalle' mensaje.id %}">
-                                                <span class="text">
-                                                    {{ mensaje.mensaje }}
-                                                </span>
-                                                </a>
-                                            </span>
+                                            <i class="ace-icon fa fa-star orange2"></i>
+
+                                            &nbsp;
+                                            <img class="middle" alt="John's Avatar" src="{% static 'nucleo/assets/images/avatars/avatar.png' %}" width="32" />
+                                            &nbsp;
+                                            <a class="sender">{{ mensaje.remitente }}</a>
+
+                                            &nbsp;
+                                            <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
+                                            <span class="time grey">{{ mensaje.fecha_creacion }}</span>
                                         </div>
-                                    {% endfor %}
-                                </div>
+                                    </div>
+
+                                    <div class="hr hr-double"></div>
+
+                                    <div class="message-body">
+                                        <p>
+                                            {{ mensaje.mensaje }}
+                                        </p>
+                                    </div>
+
+                                    <div class="hr hr-double"></div>
+                                </div><!-- /.message-content -->
                             </div>
 
                             <div class="message-footer clearfix">
-                                <div class="pull-left"> {{ comunicacion.count }} mensajes en total </div>
+                                <div class="pull-left"> </div>
                             </div>
                         </div>
                     </div>
@@ -93,58 +83,6 @@
             </div><!-- /.tabbable -->
         </div><!-- /.col -->
     </div><!-- /.row -->
-
-    {% for mensaje in comunicacion %}
-    <div class="hide message-content" id="id-message-content">
-        <div class="message-header clearfix">
-            <div class="pull-left">
-
-                <div class="space-4"></div>
-
-                <i class="ace-icon fa fa-star orange2"></i>
-
-                &nbsp;
-                <img class="middle" alt="John's Avatar" src="{% static 'nucleo/assets/images/avatars/avatar.png' %}" width="32" />
-                &nbsp;
-                <a href="#" class="sender">John Doe</a>
-
-                &nbsp;
-                <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
-                <span class="time grey">Today, 7:15 pm</span>
-            </div>
-        </div>
-
-        <div class="hr hr-double"></div>
-
-        <div class="message-body">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-
-            <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-
-            <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
-
-            <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-            <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
-
-            <p>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-        </div>
-
-        <div class="hr hr-double"></div>
-    </div><!-- /.message-content -->
-    {% endfor %}
 {% endblock %}
 
 {% block js_extra %}
