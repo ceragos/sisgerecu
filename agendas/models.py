@@ -34,12 +34,6 @@ class Agenda(MarcadorTiempo):
                                                                         self.fecha_separacion, self.hora_separacion,
                                                                         self.hora_devolucion)
 
-    def save(self, *args, **kwargs):
-        minuta = Minuta()
-        minuta.reserva = self
-        minuta.save()
-        return super(Agenda, self).save(*args, **kwargs)
-
 
 class Minuta(MarcadorTiempo):
     """ Almacena la información que considera necesaria el personal de servicios generales. """
