@@ -90,20 +90,20 @@
 
 								<li class="dropdown-content">
 									<ul class="dropdown-menu dropdown-navbar">
-                                        {% for mensajes in request.user.destinatario_usuario.all %}
-                                            {% if not mensajes.estado %}
+                                        {% for mensaje in request.user.destinatario_usuario.all %}
+                                            {% if not mensaje.estado %}
                                                 <li>
-                                                    <a href="#" class="clearfix">
+                                                    <a href="{% url 'comunicacion.detalle' mensaje.id %}" class="clearfix">
                                                         <img src="{% static 'nucleo/assets/images/avatars/avatar.png' %}" class="msg-photo" alt="Alex's Avatar" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
-                                                                <span class="blue">{{ mensajes.remitente }}:</span>
-                                                                {{ mensajes.mensaje }}
+                                                                <span class="blue">{{ mensaje.remitente }}:</span>
+                                                                {{ mensaje.mensaje }}
                                                             </span>
 
                                                             <span class="msg-time">
                                                                 <i class="ace-icon fa fa-clock-o"></i>
-                                                                <span>{{ mensajes.fecha_creacion }}</span>
+                                                                <span>{{ mensaje.fecha_creacion }}</span>
                                                             </span>
                                                         </span>
                                                     </a>
@@ -114,7 +114,7 @@
 								</li>
 
 								<li class="dropdown-footer">
-									<a href="{% url 'comunicacion.listar' %}">
+									<a href="{% url 'comunicacion.listar' %}?f=inbox">
 										Ver todos los mensajes
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
