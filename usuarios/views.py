@@ -19,6 +19,7 @@ class SisgerecuLoginView(LoginView):
 
     def form_valid(self, form):
         # print(self.request.POST)
+        form
         user = form.get_user()
         codigo_verificacion_formulario = form.data['codigo_verificacion']
         codigo_verificacion_bd = User.objects.get(username=self.request.POST.get('username')).codigo_verificacion
@@ -51,6 +52,8 @@ def obtener_numero_celular(request, usuario):
     :param usuario: User registrado en la base de datos
     :return: Numero celualar del usuario
     """
+    from django.utils.timezone import now
+
     usuario = User.objects.get(username=usuario)
     numero_celular_usuario = usuario.celular
 
@@ -59,6 +62,7 @@ def obtener_numero_celular(request, usuario):
 
     # Se almacena el codigo de verificacion en la base de datos
     usuario.codigo_verificacion = codigo_verificacion
+    usuario.fecha_solicitud_codigo_verificacion = now()
     usuario.save()
 
     # Se llama a la funcion que envia el codigo de verificacion al numero celular del usuario

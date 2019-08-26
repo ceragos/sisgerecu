@@ -66,6 +66,9 @@
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
+                                                    <div style="color: red;">
+                                                        {{ form.username.errors }}
+                                                    </div>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -73,16 +76,14 @@
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
+                                                    <div style="color: red;">
+                                                        {{ form.password.errors }}
+                                                    </div>
 
 													<div class="space"></div>
 
                                                     <div style="color: red;">
-                                                        {% if form.errors %}
-                                                            <p>Sus datos de acceso no coinciden. Vuelva a intentarlo.</p>
-                                                        {% endif %}
-                                                        {% if 'cod_inv' in request.GET %}
-                                                            <p>Código de verificación invalido</p>
-                                                        {% endif %}
+                                                        {{ form.codigo_verificacion.errors }}
                                                     </div>
 
 													<div class="clearfix" style="text-align: center">
