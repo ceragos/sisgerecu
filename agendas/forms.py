@@ -12,6 +12,8 @@ class CustomTimeInput(forms.TimeInput):
 
 
 class AgendaForm(forms.ModelForm):
+    hora_separacion = None
+
     class Meta:
         model = Agenda
         exclude = ['usuario']
@@ -28,16 +30,19 @@ class AgendaForm(forms.ModelForm):
         }
 
     def clean_hora_separacion(self):
-        hora_separacion = self.cleaned_data['hora_separacion']
+        self.hora_separacion = self.cleaned_data.get('hora_separacion')
 
-        if hora_separacion < datetime.now().time():
+        if self.hora_separacion < datetime.now().time():
             raise ValidationError('Esta hora no puede ser anterior a la hora actual')
 
-        return hora_separacion
+        return self.hora_separacion
 
     def clean_hora_devolucion(self):
-        hora_separacion = self.cleaned_data['hora_separacion']
         hora_devolucion = self.cleaned_data['hora_devolucion']
+        try:
+            hora_separacion = self.cleaned_data['hora_separacion']
+        except Exception:
+            hora_separacion = self.hora_separacion
 
         if hora_separacion > hora_devolucion:
             raise ValidationError('Esta hora no puede ser anterior a la hora de separación')

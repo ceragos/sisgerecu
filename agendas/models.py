@@ -1,4 +1,3 @@
-from dateutil.utils import today
 from django.db import models
 from nucleo.models import MarcadorTiempo
 from recursos.models import RecursoFisico, RecursoTecnologico
@@ -7,7 +6,6 @@ from django.utils.timezone import now
 
 
 ESTADO_RESERVA_CHOICES = (
-    ('P', 'Pendiente'),
     ('E', 'Entregado'),
     ('R', 'Recibido'),
 )
@@ -40,7 +38,7 @@ class Minuta(MarcadorTiempo):
     reserva = models.OneToOneField(Agenda, null=False, blank=False, verbose_name='reserva en la agenda',
                                    related_name='reserva_agenda', on_delete=models.PROTECT)
     estado = models.CharField(max_length=1, blank=False, null=False, choices=ESTADO_RESERVA_CHOICES,
-                              verbose_name='estado', default='P')
+                              verbose_name='estado')
     observacion = models.TextField(null=True, blank=True, verbose_name='observacion')
     encargado = models.ForeignKey(User, null=True, blank=True, verbose_name='encargado', on_delete=models.PROTECT)
 
