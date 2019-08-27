@@ -93,7 +93,9 @@
                         <th class="hidden-480">Hora Fin</th>
                         <th class="hidden-480">Recurso Físico</th>
                         <th class="hidden-480">Recurso Tecnologico</th>
-{#                        <th></th>#}
+                        {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                            <th>Opciones</th>
+                        {% endif %}
                     </tr>
                 </thead>
 
@@ -134,6 +136,16 @@
                                     {{ recurso }}{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </td>
+                            {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
+                                    <a href="{% url 'minuta.crear' reserva.id %}" role="button"
+                                       class="btn btn-xs btn-warning" data-toggle="modal">
+                                        <i class="ace-icon fa fa-camera bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            {% endif %}
                         </tr>
 
                         <tr class="detail-row">

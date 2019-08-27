@@ -11,6 +11,13 @@ ESTADO_RESERVA_CHOICES = (
 )
 
 
+def get_display(key, list):
+    d = dict(list)
+    if key in d:
+        return d[key]
+    return None
+
+
 class Agenda(MarcadorTiempo):
     """ Almacena la agenda programada por los docentes. """
     usuario = models.ForeignKey(User, null=True, blank=True, verbose_name='User', on_delete=models.PROTECT,
@@ -40,7 +47,12 @@ class Minuta(MarcadorTiempo):
     estado = models.CharField(max_length=1, blank=False, null=False, choices=ESTADO_RESERVA_CHOICES,
                               verbose_name='estado')
     observacion = models.TextField(null=True, blank=True, verbose_name='observacion')
-    encargado = models.ForeignKey(User, null=True, blank=True, verbose_name='encargado', on_delete=models.PROTECT)
+    servicios_generales = models.ForeignKey(User, null=True, blank=True, verbose_name='servicios generales',
+                                            on_delete=models.PROTECT)
+    fecha_registro = models.DateField(null=False, blank=False, verbose_name='Fecha de Separación', default=now())
+
+    def estado_verbose(self):
+        return get_display(self.estado, ESTADO_RESERVA_CHOICES)
 
     def __str__(self):
-        return self.reserva
+        return '{}'.format(self.reserva)

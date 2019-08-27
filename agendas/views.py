@@ -4,8 +4,8 @@ from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic import CreateView, UpdateView, DeleteView
 
-from agendas.forms import AgendaForm, FechaForm
-from agendas.models import Agenda
+from agendas.forms import AgendaForm, FechaForm, MinutaForm
+from agendas.models import Agenda, Minuta
 
 
 class AgendaGeneralListView(ListView):
@@ -81,3 +81,64 @@ class MiAgendaDeleteView(DeleteView):
     model = Agenda
     template_name = 'agendas/mi_agenda/eliminar.html'
     success_url = reverse_lazy('mi_agenda.listar')
+
+
+class MinutaListView(ListView):
+    model = Minuta
+    template_name = 'agendas/minuta/listar.html'
+    paginate_by = 100
+    context_object_name = 'minutas'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = FechaForm
+        return context
+
+    def get_queryset(self):
+        queryset = super(MinutaListView, self).get_queryset()
+        fecha = date.today()
+        if self.request.GET.get('fecha'):
+            from datetime import datetime
+            fecha_str = self.request.GET.get('fecha')
+            fecha = datetime.strptime(fecha_str, '%d-%m-%Y')
+        return queryset.filter(fecha_registro=fecha)
+
+
+class MinutaCreateView(CreateView):
+    model = Minuta
+    form_class = MinutaForm
+    template_name = 'agendas/minuta/crear.html'
+    context_object_name = 'minuta'
+    success_url = reverse_lazy('minuta.listar')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reserva'] = Agenda.objects.get(id=self.kwargs['id_reserva'])
+        data = {
+            'reserva': Agenda.objects.get(id=self.kwargs['id_reserva']),
+            'servicios_generales': self.request.user,
+            'estado': 'E'
+        }
+        data_form = {
+            'reserva': self.kwargs['id_reserva'],
+            'servicios_generales': self.request.user.id,
+            'estado': 'E'
+        }
+        form = MinutaForm(data_form)
+        context['form'] = form
+        context['data'] = data
+        return context
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        return super(MinutaCreateView, self).form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(MinutaCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_invalid(self, form):
+        from django.http import HttpResponse
+        return HttpResponse(form.cleaned_data)

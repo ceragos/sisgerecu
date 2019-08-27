@@ -45,11 +45,9 @@ class ComunicacionInternaCreateView(CreateView):
         return kwargs
 
     def form_valid(self, form):
-        print('valido')
         return super(ComunicacionInternaCreateView, self).form_valid(form)
 
     def form_invalid(self, form):
-        print('invalido')
         from django.http import HttpResponse
         return HttpResponse(form.cleaned_data)
 

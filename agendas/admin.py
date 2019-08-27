@@ -15,5 +15,5 @@ class AgendasAdmin(admin.ModelAdmin):
 
 @admin.register(Minuta)
 class MinutaAdmin(admin.ModelAdmin):
-    list_display = ('reserva', 'encargado', 'fecha_creacion', 'fecha_modificacion')
+    list_display = ('reserva', 'servicios_generales', 'observacion', 'fecha_creacion', 'fecha_modificacion')
     readonly_fields = ['fecha_creacion', 'fecha_modificacion']

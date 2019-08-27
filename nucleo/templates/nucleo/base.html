@@ -219,6 +219,21 @@
 					</li>
                     {% endif %}
 
+
+                    {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+					<li class="{% if request.path|slice:":19" == '/agendas/minuta/' %}active{% endif %}">
+						<a href="{% url 'minuta.listar' %}">
+							<i class="menu-icon fa fa-check-square-o"></i>
+							<span class="menu-text">
+								Minuta
+							</span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+                    {% endif %}
+
+
                     {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
 					<li class="{% if request.path|slice:":16" == '/talento_humano/' %}active{% endif %}">
 						<a href="{% url 'empleado.list' %}">

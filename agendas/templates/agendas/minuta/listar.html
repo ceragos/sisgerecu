@@ -1,0 +1,143 @@
+{% extends 'nucleo/base.html' %}
+{% load static %}
+{% load formato_fecha %}
+{% block title %}Minuta - G. R.{% endblock %}
+
+{% block plugin_css %}
+    {#  Calendario datefield  #}
+    <link rel="stylesheet" href="{% static 'nucleo/assets/css/bootstrap-datepicker3.min.css' %}" />
+{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a href="#">Minuta</a>
+    </li>
+
+    <li class="active">Listar</li>
+{% endblock %}
+
+{% block header %}
+    <div class="page-header">
+        <h1>
+            Minuta
+            <small>
+                <i class="ace-icon fa fa-angle-double-right"></i>
+                Corporación UNIREMINGTON
+            </small>
+        </h1>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <form action="" method="get">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <label for="id-date-picker-1">Fecha De Minuta</label>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-11">
+                            <div class="input-group">
+                                <input class="form-control date-picker"
+                                       name="fecha" id="id-date-picker-1"
+                                       type="text" data-date-format="dd-mm-yyyy"
+                                       autocomplete="off"
+                                       value="{{ request.GET.fecha }}"
+                                />
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar bigger-110"></i>
+                                </span>
+                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                <span class="input-group-btn">
+                                    <button type="submit" value="Filtrar" class="btn btn-sm btn-primary">
+                                        <i class="ace-icon fa fa-filter bigger-110"></i>Filtrar
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table id="simple-table" class="table  table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Reserva</th>
+                        <th>Servicios Generales</th>
+                        <th>Observacion</th>
+                        <th class="hidden-480">Estado</th>
+                        <th class="hidden-480">Fecha de Creación</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for minuta in minutas %}
+                        <tr>
+                            <td>{{ minuta.reserva }}</td>
+                            <td>{{ minuta.servicios_generales }}</td>
+                            <td>{{ minuta.observacion }}</td>
+                            <td class="hidden-480">{{ minuta.estado_verbose}}</td>
+                            <td class="hidden-480">{{ minuta.fecha_creacion }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8" align="center">
+                                No existen solicitudes registradas en la minuta en este momento.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_extra %}
+    {#  Calendario datefield  #}
+    <script src="{% static 'nucleo/assets/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'nucleo/assets/js/bootstrap-timepicker.min.js' %}"></script>
+    <script src="{% static 'nucleo/assets/js/moment.min.js' %}"></script>
+    <script src="{% static 'nucleo/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+    <script src="{% static 'nucleo/assets/js/bootstrap-colorpicker.min.js' %}"></script>
+{% endblock %}
+
+{% block js_script %}
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('.modal.aside').ace_aside();
+
+            $('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
+
+            //$('#top-menu').modal('show')
+
+            $(document).one('ajaxloadstart.page', function(e) {
+                //in ajax mode, remove before leaving page
+                $('.modal.aside').remove();
+                $(window).off('.aside')
+            });
+
+            //make content sliders resizable using jQuery UI (you should include jquery ui files)
+            //$('#right-menu > .modal-dialog').resizable({handles: "w", grid: [ 20, 0 ], minWidth: 200, maxWidth: 600});
+
+            //datepicker plugin
+            //link
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            })
+            //show datepicker when clicking on the icon
+            .next().on(ace.click_event, function(){
+                $(this).prev().focus();
+            });
+        })
+    </script>
+{% endblock %}

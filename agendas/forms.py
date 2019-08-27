@@ -4,7 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 
-from agendas.models import Agenda
+from agendas.models import Agenda, Minuta
 
 
 class CustomTimeInput(forms.TimeInput):
@@ -116,3 +116,31 @@ class AgendaForm(forms.ModelForm):
 
 class FechaForm(forms.Form):
     fecha = forms.DateField(required=False)
+
+
+class MinutaForm(forms.ModelForm):
+    class Meta:
+        model = Minuta
+        fields = ['reserva', 'servicios_generales', 'estado', 'observacion']
+        widgets = {
+            'reserva': forms.Select(attrs={'class': 'form-control hidden'}),
+            'servicios_generales': forms.Select(attrs={'class': 'form-control hidden'}),
+            'estado': forms.Select(attrs={'class': 'form-control hidden'}),
+            'observacion': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(MinutaForm, self).__init__(*args, **kwargs)
+
+    # def clean_servicios_generales(self):
+    #     return self.user.id
+    #
+    # def clean_reserva(self):
+    #     reserva = self.cleaned_data['reserva']
+    #     return reserva.id
+
+    def clean_estado(self):
+        if self.instance:
+            return 'R'
+        return 'E'

@@ -27,89 +27,79 @@
 {% endblock %}
 
 {% block content %}
-{#    <form action="" method="post">{% csrf_token %}#}
-{#        {{ form }}#}
-{#        <button id="id-add-attachment" type="submit" class="btn btn-sm btn-primary">#}
-{#            <i class="ace-icon fa fa-send bigger-140"></i>#}
-{#            Enviar#}
-{#        </button>#}
-{#    </form>#}
     <form id="id-message-form" class="form-horizontal message-form col-xs-12" method="post">{% csrf_token %}
-            <div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="destinatario">Destinatario:</label>
+        <div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="destinatario">Destinatario:</label>
 
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="input-icon col-xs-12 no-padding">
-                            <input type="text" value="{{ reserva.usuario.nombre_completo }}"
-                            class="col-xs-8" readonly>
-                            <select id="destinatario" name="destinatario" class="col-xs-8 hidden">
-                                <option value="{{ reserva.usuario.id }}" selected>
-                                    {{ reserva.usuario.nombre_completo }}
-                                </option>
-                            </select>
-                            <i class="ace-icon fa fa-user"></i>
-                        </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon col-xs-12 no-padding">
+                        <input type="text" value="{{ reserva.usuario.nombre_completo }}"
+                        class="col-xs-8" readonly>
+                        <select id="destinatario" name="destinatario" class="col-xs-8 hidden">
+                            <option value="{{ reserva.usuario.id }}" selected>
+                                {{ reserva.usuario.nombre_completo }}
+                            </option>
+                        </select>
+                        <i class="ace-icon fa fa-user"></i>
                     </div>
                 </div>
-
-                <div class="hr hr-18 dotted hidden"></div>
-
-                <div class="form-group hidden">
-                    <label class="col-sm-3 control-label no-padding-right" for="remitente">Remitente:</label>
-
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="input-icon col-xs-12 no-padding">
-                            <select id="remitente" name="remitente" class="col-xs-8">
-                                <option value="{{ request.user.id }}" selected>{{ request.user.nombre_completo }}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hr hr-18 dotted"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="reserva">Asunto:</label>
-
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="input-icon block col-xs-12 no-padding">
-                            <input type="text" value="Reserva del {{ reserva.fecha_separacion }}"
-                            class="col-xs-8" readonly>
-                            <select id="reserva" name="reserva" class="col-xs-8 hidden">
-                                <option value="{{ reserva.id }}" selected>Reserva del {{ reserva.fecha_separacion }}</option>
-                            </select>
-                            <i class="ace-icon fa fa-comment-o"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hr hr-18 dotted"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">
-                        <span class="inline space-24 hidden-480"></span>
-                        Mensaje:
-                    </label>
-
-                    <div class="col-sm-9">
-                        <textarea name="mensaje" width-100 style="margin: 0px; width: 300px; height: 130px;" ></textarea>
-                    </div>
-                </div>
-
-                <div class="hr hr-18 dotted"></div>
-
-                <div class="align-right">
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        <i class="ace-icon fa fa-send bigger-140"></i>
-                        Enviar
-                    </button>
-                </div>
-
-                <div class="space"></div>
             </div>
-        </form>
 
-        </div><!-- /.col -->
-    </div>
+            <div class="hr hr-18 dotted hidden"></div>
+
+            <div class="form-group hidden">
+                <label class="col-sm-3 control-label no-padding-right" for="remitente">Remitente:</label>
+
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon col-xs-12 no-padding">
+                        <select id="remitente" name="remitente" class="col-xs-8">
+                            <option value="{{ request.user.id }}" selected>{{ request.user.nombre_completo }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="reserva">Asunto:</label>
+
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon block col-xs-12 no-padding">
+                        <input type="text" value="Reserva del {{ reserva.fecha_separacion }}"
+                        class="col-xs-8" readonly>
+                        <select id="reserva" name="reserva" class="col-xs-8 hidden">
+                            <option value="{{ reserva.id }}" selected>Reserva del {{ reserva.fecha_separacion }}</option>
+                        </select>
+                        <i class="ace-icon fa fa-comment-o"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">
+                    <span class="inline space-24 hidden-480"></span>
+                    Mensaje:
+                </label>
+
+                <div class="col-sm-9">
+                    <textarea name="mensaje" width-100 style="margin: 0px; width: 300px; height: 130px;" ></textarea>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="align-right">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="ace-icon fa fa-send bigger-140"></i>
+                    Enviar
+                </button>
+            </div>
+
+            <div class="space"></div>
+        </div>
+    </form>
 {% endblock %}

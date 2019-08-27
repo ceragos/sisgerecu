@@ -1,0 +1,90 @@
+{% extends 'nucleo/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{#    <form action="">{% csrf_token %}#}
+{#        {{ form|crispy }}#}
+{#        <button id="id-add-attachment" type="submit" class="btn btn-sm btn-primary">#}
+{#            <i class="ace-icon fa fa-send bigger-140"></i>#}
+{#            Guardar#}
+{#        </button>#}
+{#    </form>#}
+    <form id="id-message-form" class="form-horizontal message-form col-xs-12" method="post">{% csrf_token %}
+        <div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="destinatario">Reserva:</label>
+
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon col-xs-12 no-padding">
+                        <input type="text" value="Reserva del {{ data.reserva.fecha_separacion }}"
+                        class="col-xs-8" readonly>
+                        <select id="destinatario" name="reserva" class="col-xs-8">
+                            <option value="{{ data.reserva.id }}" selected>
+                                Reserva del {{ data.reserva.fecha_separacion }}
+                            </option>
+                        </select>
+                        <i class="ace-icon fa fa-comment-o"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="remitente">Usuario de Servicios Generales:</label>
+
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon col-xs-12 no-padding">
+                        <input type="text" value="{{ request.user.nombre_completo }}"
+                        class="col-xs-8" readonly>
+                        <select id="remitente" name="servicios_generales" class="col-xs-8">
+                            <option value="{{ request.user.id }}" selected>{{ request.user.nombre_completo }}</option>
+                        </select>
+                        <i class="ace-icon fa fa-user"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="reserva">Estado:</label>
+
+                <div class="col-sm-6 col-xs-12">
+                    <div class="input-icon block col-xs-12 no-padding">
+                        <input type="text" value="Entregado"
+                        class="col-xs-8" readonly>
+                        <select id="reserva" name="reserva" class="col-xs-8">
+                            <option value="E" selected>Entregado</option>
+                        </select>
+                        <i class="ace-icon fa fa-check-square-o"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">
+                    <span class="inline space-24 hidden-480"></span>
+                    Observación:
+                </label>
+
+                <div class="col-sm-9">
+                    <textarea name="observacion" width-100 style="margin: 0px; width: 300px; height: 130px;" ></textarea>
+                </div>
+            </div>
+
+            <div class="hr hr-18 dotted"></div>
+
+            <div class="align-right">
+                <button type="submit" class="btn btn-sm btn-primary">
+                    <i class="ace-icon fa fa-pencil bigger-140"></i>
+                    Guardar
+                </button>
+            </div>
+
+            <div class="space"></div>
+        </div>
+    </form>
+{% endblock %}
