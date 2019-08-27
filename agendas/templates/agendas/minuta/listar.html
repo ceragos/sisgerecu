@@ -75,6 +75,7 @@
                         <th>Observacion</th>
                         <th class="hidden-480">Estado</th>
                         <th class="hidden-480">Fecha de Creación</th>
+                        <th><span class="hidden-480">Opciones</span></th>
                     </tr>
                 </thead>
 
@@ -83,9 +84,24 @@
                         <tr>
                             <td>{{ minuta.reserva }}</td>
                             <td>{{ minuta.servicios_generales }}</td>
-                            <td>{{ minuta.observacion }}</td>
+                            <td>{{ minuta.observacion|linebreaksbr }}</td>
                             <td class="hidden-480">{{ minuta.estado_verbose}}</td>
                             <td class="hidden-480">{{ minuta.fecha_creacion }}</td>
+                            <td class="hidden-480">
+                                <div class="btn-group">
+                                    {% if minuta.estado == 'E' %}
+                                        <a href="{% url 'minuta.actualizar' minuta.id %}" role="button"
+                                           class="btn btn-xs btn-primary" title="Recibir">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </a>
+                                    {% else %}
+                                        <a role="button"
+                                           class="btn btn-xs btn-success" title="Recibdo">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </td>
                         </tr>
                     {% empty %}
                         <tr>

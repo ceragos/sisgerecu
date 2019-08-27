@@ -94,7 +94,7 @@
                         <th class="hidden-480">Recurso Físico</th>
                         <th class="hidden-480">Recurso Tecnologico</th>
                         {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
-                            <th>Opciones</th>
+                            <th><span class="hidden-480">Opciones</span></th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -138,11 +138,23 @@
                             </td>
                             {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
                             <td>
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="{% url 'minuta.crear' reserva.id %}" role="button"
-                                       class="btn btn-xs btn-warning" data-toggle="modal">
-                                        <i class="ace-icon fa fa-camera bigger-120"></i>
-                                    </a>
+                                <div class="btn-group">
+                                    {% if not reserva.reserva_agenda.estado %}
+                                        <a href="{% url 'minuta.crear' reserva.id %}" role="button"
+                                           class="btn btn-xs btn-warning" title="Entregar">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </a>
+                                    {% elif reserva.reserva_agenda.estado == 'E' %}
+                                        <a href="{% url 'minuta.actualizar' reserva.reserva_agenda.id %}" role="button"
+                                           class="btn btn-xs btn-primary" title="Recibir">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </a>
+                                    {% else %}
+                                        <a role="button"
+                                           class="btn btn-xs btn-success" title="Recibido">
+                                            <i class="ace-icon fa fa-check bigger-120"></i>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </td>
                             {% endif %}
@@ -235,6 +247,7 @@
                                             </div>
                                         </div>
 
+                                        {% if reserva.usuario != request.user %}
                                         <div class="col-xs-12 col-sm-3">
                                             <div class="space visible-xs"></div>
                                             <h4 class="header less-margin">Enviar mensaje a {{ reserva.usuario.first_name }}</h4>
@@ -249,8 +262,8 @@
                                                     </span>
                                                 </a>
                                             </div>
-
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </td>

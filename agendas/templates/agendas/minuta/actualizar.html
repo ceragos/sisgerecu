@@ -16,11 +16,11 @@
 
                 <div class="col-sm-6 col-xs-12">
                     <div class="input-icon col-xs-12 no-padding">
-                        <input type="text" value="Reserva del {{ reserva.fecha_separacion }}"
+                        <input type="text" value="Reserva del {{ minuta.reserva.fecha_separacion }}"
                         class="col-xs-8" readonly>
                         <select id="reserva" name="reserva" class="col-xs-8 hidden">
-                            <option value="{{ reserva.id }}" selected>
-                                Reserva del {{ reserva.fecha_separacion }}
+                            <option value="{{ minuta.reserva.id }}" selected>
+                                Reserva del {{ minuta.reserva.fecha_separacion }}
                             </option>
                         </select>
                         <i class="ace-icon fa fa-comment-o"></i>
@@ -54,10 +54,10 @@
 
                 <div class="col-sm-6 col-xs-12">
                     <div class="input-icon block col-xs-12 no-padding">
-                        <input type="text" value="Entregado"
+                        <input type="text" value="Recibido"
                         class="col-xs-8" readonly>
                         <select id="estado" name="estado" class="col-xs-8 hidden">
-                            <option value="E" selected>Entregado</option>
+                            <option value="R" selected>Recibido</option>
                         </select>
                         <i class="ace-icon fa fa-check-square-o"></i>
                     </div>

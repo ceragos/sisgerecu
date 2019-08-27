@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from agendas.views import MiAgendaListView, AgendaGeneralListView, MiAgendaCreateView, MiAgendaUpdateView, \
-    MiAgendaDeleteView, MinutaListView, MinutaCreateView
+    MiAgendaDeleteView, MinutaListView, MinutaCreateView, MinutaUpdateView
 
 urlpatterns = [
 
@@ -14,5 +14,6 @@ urlpatterns = [
     path(r'mi_agenda/eliminar/<int:pk>', login_required(MiAgendaDeleteView.as_view()), name='agendas.eliminar'),
 
     path(r'minuta/', login_required(MinutaListView.as_view()), name='minuta.listar'),
-    path(r'minuta/crear/<int:id_reserva>/', login_required(MinutaCreateView.as_view()), name='minuta.crear')
+    path(r'minuta/crear/<int:id_reserva>/', login_required(MinutaCreateView.as_view()), name='minuta.crear'),
+    path(r'minuta/actualizar/<int:pk>/', login_required(MinutaUpdateView.as_view()), name='minuta.actualizar')
 ]

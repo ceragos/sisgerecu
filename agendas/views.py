@@ -114,24 +114,9 @@ class MinutaCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reserva'] = Agenda.objects.get(id=self.kwargs['id_reserva'])
-        data = {
-            'reserva': Agenda.objects.get(id=self.kwargs['id_reserva']),
-            'servicios_generales': self.request.user,
-            'estado': 'E'
-        }
-        data_form = {
-            'reserva': self.kwargs['id_reserva'],
-            'servicios_generales': self.request.user.id,
-            'estado': 'E'
-        }
-        form = MinutaForm(data_form)
-        context['form'] = form
-        context['data'] = data
         return context
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
         return super(MinutaCreateView, self).form_valid(form)
 
     def get_form_kwargs(self):
@@ -142,3 +127,16 @@ class MinutaCreateView(CreateView):
     def form_invalid(self, form):
         from django.http import HttpResponse
         return HttpResponse(form.cleaned_data)
+
+
+class MinutaUpdateView(UpdateView):
+    model = Minuta
+    form_class = MinutaForm
+    template_name = 'agendas/minuta/actualizar.html'
+    context_object_name = 'minuta'
+    success_url = reverse_lazy('minuta.listar')
+
+    def get_form_kwargs(self):
+        kwargs = super(MinutaUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
