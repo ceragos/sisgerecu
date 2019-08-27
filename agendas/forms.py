@@ -3,6 +3,7 @@ from datetime import date
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.utils.timezone import now
 
 from agendas.models import Agenda
 
@@ -26,6 +27,14 @@ class AgendaForm(forms.ModelForm):
             'hora_separacion': CustomTimeInput,
             'hora_devolucion': CustomTimeInput,
         }
+
+    def clean_hora_separacion(self):
+        hora_separacion = self.cleaned_data['hora_separacion']
+
+        if hora_separacion < now():
+            raise ValidationError('Esta hora no puede ser anterior a la hora actual')
+
+        return hora_separacion
 
     def clean_hora_devolucion(self):
         hora_separacion = self.cleaned_data['hora_separacion']
