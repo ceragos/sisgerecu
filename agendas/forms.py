@@ -13,6 +13,7 @@ class CustomTimeInput(forms.TimeInput):
 
 class AgendaForm(forms.ModelForm):
     hora_separacion = None
+    fecha_separacion = None
 
     class Meta:
         model = Agenda
@@ -29,10 +30,18 @@ class AgendaForm(forms.ModelForm):
             'hora_devolucion': CustomTimeInput,
         }
 
+    def clean_fecha_separacion(self):
+        self.fecha_separacion = self.cleaned_data.get('fecha_separacion')
+
+        if self.fecha_separacion < datetime.now().date():
+            raise ValidationError('Esta fecha no puede ser anterior a la fecha actual')
+
+        return self.fecha_separacion
+
     def clean_hora_separacion(self):
         self.hora_separacion = self.cleaned_data.get('hora_separacion')
-
-        if self.hora_separacion < datetime.now().time():
+        fecha_hora = datetime.combine(self.fecha_separacion, self.hora_separacion)
+        if fecha_hora < datetime.now():
             raise ValidationError('Esta hora no puede ser anterior a la hora actual')
 
         return self.hora_separacion
