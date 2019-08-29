@@ -140,6 +140,7 @@
                                 {% endfor %}
                             </td>
                             <td>
+                                {% if reserva|validar_botones_agenda %}
                                 <div class="hidden-sm hidden-xs btn-group">
 
                                     <a href="{% url 'agendas.actualizar' reserva.id %}" class="btn btn-xs btn-info">
@@ -149,7 +150,7 @@
                                     <a href="{% url 'agendas.eliminar' reserva.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
-
+                                {% endif %}
                                 </div>
                             </td>
                         </tr>
