@@ -94,7 +94,8 @@
                                             {% if not mensaje.estado %}
                                                 <li>
                                                     <a href="{% url 'comunicacion.detalle' mensaje.id %}" class="clearfix">
-                                                        <img src="{% static 'nucleo/assets/images/avatars/avatar.png' %}" class="msg-photo" alt="Alex's Avatar" />
+                                                        <img src="{{ mensaje.remitente.foto_perfil.url }}"
+                                                             class="msg-photo" alt="{{ mensaje.remitente.nombre_completo }}" />
                                                         <span class="msg-body">
                                                             <span class="msg-title">
                                                                 <span class="blue">{{ mensaje.remitente }}:</span>
