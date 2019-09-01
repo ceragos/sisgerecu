@@ -5,9 +5,9 @@
 
 {% block plugin_css %}
     {#  Calendario datefield  #}
-    <link rel="stylesheet" href="{% static 'nucleo/assets/css/bootstrap-datepicker3.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'nucleo/assets/css/bootstrap-datepicker3.min.css' %}"/>
     {#  Galeria de imagenes  #}
-    <link rel="stylesheet" href="{% static 'nucleo/assets/css/colorbox.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'nucleo/assets/css/colorbox.min.css' %}"/>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -43,90 +43,92 @@
 
 {% block content %}
     {% if 'create_ok' in request.GET %}
-    <div class="alert alert-success">
-        <button class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-        ¡La reserva se creó exitosamente!<br>
-        Recuerde entregar los recursos <strong class="green">10 minutos</strong> antes de la hora de devolución fijada.
-    </div>
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            ¡La reserva se creó exitosamente!<br>
+            Recuerde entregar los recursos <strong class="green">10 minutos</strong> antes de la hora de devolución
+            fijada.
+        </div>
     {% endif %}
     {% if 'edit_ok' in request.GET %}
-    <div class="alert alert-info">
-        <button class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-        ¡La reserva se actualizo exitosamente!<br>
-        Recuerde entregar los recursos <strong class="blue">10 minutos</strong> antes de la hora de devolución fijada.
-    </div>
+        <div class="alert alert-info">
+            <button class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            ¡La reserva se actualizo exitosamente!<br>
+            Recuerde entregar los recursos <strong class="blue">10 minutos</strong> antes de la hora de devolución
+            fijada.
+        </div>
     {% endif %}
     <form action="" method="get">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="widget-body">
-                <div class="widget-main">
-                    <label for="id-date-picker-1">Fecha De Agenda</label>
-                    <div class="row">
-                        <div class="col-xs-8 col-sm-11">
-                            <div class="input-group">
-                                <input class="form-control date-picker"
-                                       name="fecha" id="id-date-picker-1"
-                                       type="text" data-date-format="dd-mm-yyyy"
-                                       autocomplete="off"
-                                       value="{{ request.GET.fecha }}"
-                                />
-                                <span class="input-group-addon">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="widget-body">
+                    <div class="widget-main">
+                        <label for="id-date-picker-1">Fecha De Agenda</label>
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-11">
+                                <div class="input-group">
+                                    <input class="form-control date-picker"
+                                           name="fecha" id="id-date-picker-1"
+                                           type="text" data-date-format="dd-mm-yyyy"
+                                           autocomplete="off"
+                                           value="{{ request.GET.fecha }}"
+                                    />
+                                    <span class="input-group-addon">
                                     <i class="fa fa-calendar bigger-110"></i>
                                 </span>
-                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
-                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
-                                <span class="input-group-btn"></span><span class="input-group-btn"></span>
-                                <span class="input-group-btn">
+                                    <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                    <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                    <span class="input-group-btn"></span><span class="input-group-btn"></span>
+                                    <span class="input-group-btn">
                                     <button type="submit" value="Filtrar" class="btn btn-sm btn-primary">
                                         <i class="ace-icon fa fa-filter bigger-110"></i>Filtrar
                                     </button>
                                 </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 
     <div class="row">
         <div class="col-xs-12">
             <table id="simple-table" class="table  table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th>Responsable</th>
-                        <th>Fecha de Reserva</th>
-                        <th>Hora Inicio</th>
-                        <th class="hidden-480">Hora Fin</th>
-                        <th class="hidden-480">Recurso Físico</th>
-                        <th class="hidden-480">Recurso Tecnologico</th>
-                        <th>Opciones</th>
-                    </tr>
+                <tr>
+                    <th>Responsable</th>
+                    <th>Fecha de Reserva</th>
+                    <th>Hora Inicio</th>
+                    <th class="hidden-480">Hora Fin</th>
+                    <th class="hidden-480">Recurso Físico</th>
+                    <th class="hidden-480">Recurso Tecnologico</th>
+                    <th>Opciones</th>
+                </tr>
                 </thead>
 
                 <tbody>
-                    {% for reserva in agendas %}
-                        <tr>
-                            <td>{{ reserva.usuario.nombre_completo }}</td>
-                            <td>{{ reserva.fecha_separacion }}</td>
-                            <td>{{ reserva.hora_separacion|formato_12_horas }}</td>
-                            <td class="hidden-480">{{ reserva.hora_devolucion|formato_12_horas }}</td>
-                            <td class="hidden-480">
-                                <div class="hidden-sm hidden-xs btn-group">
-                                    <a href="#my-modal-f{{ reserva.id }}" role="button" class="btn btn-xs btn-warning"
-                                       data-toggle="modal">
-                                        <i class="ace-icon fa fa-camera bigger-120"></i>
-                                    </a>
-                                </div>
-                                {{ reserva.recurso_fisico }}
-                            </td>
-                            <td class="hidden-480">
+                {% for reserva in agendas %}
+                    <tr>
+                        <td>{{ reserva.usuario.nombre_completo }}</td>
+                        <td>{{ reserva.fecha_separacion }}</td>
+                        <td>{{ reserva.hora_separacion|formato_12_horas }}</td>
+                        <td class="hidden-480">{{ reserva.hora_devolucion|formato_12_horas }}</td>
+                        <td class="hidden-480">
+                            <div class="hidden-sm hidden-xs btn-group">
+                                <a href="#my-modal-f{{ reserva.id }}" role="button" class="btn btn-xs btn-warning"
+                                   data-toggle="modal">
+                                    <i class="ace-icon fa fa-camera bigger-120"></i>
+                                </a>
+                            </div>
+                            {{ reserva.recurso_fisico }}
+                        </td>
+                        <td class="hidden-480">
                             {% if reserva.recurso_tecnologico.all %}
                                 <div class="hidden-sm hidden-xs btn-group">
                                     <a href="#my-modal-t{{ reserva.id }}" role="button" class="btn btn-xs btn-warning"
@@ -135,83 +137,107 @@
                                     </a>
                                 </div>
                             {% endif %}
-                                {% for recurso in reserva.recurso_tecnologico.all %}
-                                    {{ recurso }} {% if not forloop.last %},{% endif %}
-                                {% endfor %}
-                            </td>
-                            <td>
-                                {% if reserva|validar_botones_agenda %}
+                            {% for recurso in reserva.recurso_tecnologico.all %}
+                                {{ recurso }} {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% if reserva|validar_botones_agenda %}
                                 <div class="hidden-sm hidden-xs btn-group">
 
-                                    <a href="{% url 'agendas.actualizar' reserva.id %}" class="btn btn-xs btn-info">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    </a>
+                                <a href="{% url 'agendas.actualizar' reserva.id %}" class="btn btn-xs btn-info">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
 
-                                    <a href="{% url 'agendas.eliminar' reserva.id %}" class="btn btn-xs btn-danger">
-                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    </a>
+                                <a href="{% url 'agendas.eliminar' reserva.id %}" class="btn btn-xs btn-danger">
+                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                </a>
+                            {% endif %}
+                            {% if not reserva.reserva_agenda.estado %}
+                                <a {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                                    href="{% url 'minuta.crear' reserva.id %}"
                                 {% endif %}
+                                    role="button" class="btn btn-xs btn-warning" title="Entregar">
+                                    <i class="ace-icon fa fa-check bigger-120"></i>
+                                </a>
+                            {% elif reserva.reserva_agenda.estado == 'E' %}
+                                <a {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                                    href="{% url 'minuta.actualizar' reserva.reserva_agenda.id %}"
+                                {% endif %}
+                                    role="button" class="btn btn-xs btn-primary" title="Recibir">
+                                    <i class="ace-icon fa fa-check bigger-120"></i>
+                                </a>
+                            {% else %}
+                                <a role="button"
+                                   class="btn btn-xs btn-success" title="Recibido">
+                                    <i class="ace-icon fa fa-check bigger-120"></i>
+                                </a>
+                            {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <div id="my-modal-f{{ reserva.id }}" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h3 class="smaller lighter blue no-margin">{{ reserva.recurso_fisico.nombre }}</h3>
                                 </div>
-                            </td>
-                        </tr>
 
-                        <div id="my-modal-f{{ reserva.id }}" class="modal fade" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h3 class="smaller lighter blue no-margin">{{ reserva.recurso_fisico.nombre }}</h3>
-                                    </div>
-
-                                    <div class="modal-body">
-                                        <div>
-                                            <ul class="ace-thumbnails clearfix">
-                                                {% for foto in reserva.recurso_fisico.galeria_rf.all %}
-                                                    <li>
-                                                        <a data-rel="colorbox">
-                                                            <img width="150" height="150" alt="150x150"
-                                                                 src="{{foto.imagen.url}}" />
-                                                            <div class="text">
-                                                                <div class="inner">{{ foto }}</div>
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
-                                            <i class="ace-icon fa fa-times"></i>
-                                            Close
-                                        </button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div>
-
-                        <div id="my-modal-t{{ reserva.id }}" class="modal fade" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h3 class="smaller lighter blue no-margin">
-                                            {% for recurso in reserva.recurso_tecnologico.all %}
-                                                {{ recurso }}{% if not forloop.last %}, {% endif %}
+                                <div class="modal-body">
+                                    <div>
+                                        <ul class="ace-thumbnails clearfix">
+                                            {% for foto in reserva.recurso_fisico.galeria_rf.all %}
+                                                <li>
+                                                    <a data-rel="colorbox">
+                                                        <img width="150" height="150" alt="150x150"
+                                                             src="{{ foto.imagen.url }}"/>
+                                                        <div class="text">
+                                                            <div class="inner">{{ foto }}</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
                                             {% endfor %}
-                                        </h3>
+                                        </ul>
                                     </div>
+                                </div>
 
-                                    <div class="modal-body">
-                                        <div>
-                                            <ul class="ace-thumbnails clearfix">
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                                        <i class="ace-icon fa fa-times"></i>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+
+                    <div id="my-modal-t{{ reserva.id }}" class="modal fade" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h3 class="smaller lighter blue no-margin">
+                                        {% for recurso in reserva.recurso_tecnologico.all %}
+                                            {{ recurso }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </h3>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div>
+                                        <ul class="ace-thumbnails clearfix">
                                             {% for recurso in reserva.recurso_tecnologico.all %}
                                                 {% for foto in recurso.galeria_rt.all %}
                                                     <li>
                                                         <a data-rel="colorbox">
                                                             <img width="150" height="150" alt="150x150"
-                                                                 src="{{foto.imagen.url}}" />
+                                                                 src="{{ foto.imagen.url }}"/>
                                                             <div class="text">
                                                                 <div class="inner">{{ foto }}</div>
                                                             </div>
@@ -219,26 +245,26 @@
                                                     </li>
                                                 {% endfor %}
                                             {% endfor %}
-                                            </ul>
-                                        </div>
+                                        </ul>
                                     </div>
+                                </div>
 
-                                    <div class="modal-footer">
-                                        <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
-                                            <i class="ace-icon fa fa-times"></i>
-                                            Close
-                                        </button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div>
-                    {% empty %}
-                        <tr>
-                            <td colspan="8" align="center">
-                                No existen solicitudes registradas en la agenda en este momento.
-                            </td>
-                        </tr>
-                    {% endfor %}
+                                <div class="modal-footer">
+                                    <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                                        <i class="ace-icon fa fa-times"></i>
+                                        Cerrar
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                {% empty %}
+                    <tr>
+                        <td colspan="8" align="center">
+                            No existen solicitudes registradas en la agenda en este momento.
+                        </td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -259,14 +285,14 @@
 {% block js_script %}
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
-        jQuery(function($) {
+        jQuery(function ($) {
             $('.modal.aside').ace_aside();
 
             $('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
 
             //$('#top-menu').modal('show')
 
-            $(document).one('ajaxloadstart.page', function(e) {
+            $(document).one('ajaxloadstart.page', function (e) {
                 //in ajax mode, remove before leaving page
                 $('.modal.aside').remove();
                 $(window).off('.aside')
@@ -282,7 +308,7 @@
                 todayHighlight: true
             })
             //show datepicker when clicking on the icon
-            .next().on(ace.click_event, function(){
+                .next().on(ace.click_event, function () {
                 $(this).prev().focus();
             });
         })
