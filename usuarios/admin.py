@@ -5,7 +5,7 @@ from usuarios.models import User
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    filter_horizontal = ('groups',)
+    filter_horizontal = ('groups', 'user_permissions')
 
     def __init__(self, *args, **kwargs):
         super(UserAdmin, self).__init__(*args, **kwargs)
