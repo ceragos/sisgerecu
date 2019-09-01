@@ -142,7 +142,7 @@
                             {% endfor %}
                         </td>
                         <td>
-                            {% if reserva|validar_botones_agenda %}
+                            {% if reserva|validar_botones_agenda and not reserva.reserva_agenda%}
                                 <div class="hidden-sm hidden-xs btn-group">
 
                                 <a href="{% url 'agendas.actualizar' reserva.id %}" class="btn btn-xs btn-info">
@@ -154,16 +154,34 @@
                                 </a>
                             {% endif %}
                             {% if not reserva.reserva_agenda.estado %}
-                                <a role="button" class="btn btn-xs btn-warning" title="Entregar">
+                                <a role="button" class="btn btn-xs btn-warning"
+                                   {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                                        title="Entregar"
+                                        {% else %}
+                                        title="Pendiente"
+                                        {% endif %}
+                                >
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </a>
                             {% elif reserva.reserva_agenda.estado == 'E' %}
-                                <a role="button" class="btn btn-xs btn-primary" title="Recibir">
+                                <a role="button" class="btn btn-xs btn-primary"
+                                   {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                                        title="Recibir"
+                                        {% else %}
+                                        title="Recibido"
+                                        {% endif %}
+                                >
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </a>
                             {% else %}
                                 <a role="button"
-                                   class="btn btn-xs btn-success" title="Recibido">
+                                   class="btn btn-xs btn-success"
+                                   {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                                        title="Recibido"
+                                        {% else %}
+                                        title="Entregado"
+                                        {% endif %}
+                                >
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </a>
                             {% endif %}
