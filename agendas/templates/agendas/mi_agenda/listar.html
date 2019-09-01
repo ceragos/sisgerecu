@@ -154,17 +154,11 @@
                                 </a>
                             {% endif %}
                             {% if not reserva.reserva_agenda.estado %}
-                                <a {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
-                                    href="{% url 'minuta.crear' reserva.id %}"
-                                {% endif %}
-                                    role="button" class="btn btn-xs btn-warning" title="Entregar">
+                                <a role="button" class="btn btn-xs btn-warning" title="Entregar">
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </a>
                             {% elif reserva.reserva_agenda.estado == 'E' %}
-                                <a {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
-                                    href="{% url 'minuta.actualizar' reserva.reserva_agenda.id %}"
-                                {% endif %}
-                                    role="button" class="btn btn-xs btn-primary" title="Recibir">
+                                <a role="button" class="btn btn-xs btn-primary" title="Recibir">
                                     <i class="ace-icon fa fa-check bigger-120"></i>
                                 </a>
                             {% else %}
