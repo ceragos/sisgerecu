@@ -11,19 +11,23 @@
 {% endblock %}
 
 {% block header %}
+    {% if perms.talento_humano.add_empleado %}
     <div class="pull-right hidden-xs" id="ace-settings-container">
         <a href="{% url 'empleado.create' %}" class="btn btn-primary align-right">
             <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
             Registrar Personal
         </a>
     </div>
+    {% endif %}
 
     <div class="page-header">
         <h1>
+            {% if perms.talento_humano.add_empleado %}
             <a href="{% url 'empleado.create' %}"
                class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
                 <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
             </a>
+            {% endif %}
             Talento Humano
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -98,14 +102,17 @@
 
                             <td>
                                 <div class="hidden-sm hidden-xs btn-group">
-
+                                    {% if perms.talento_humano.change_empleado %}
                                     <a href="{% url 'empleado.update' empleado.id %}" class="btn btn-xs btn-info">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
+                                    {% endif %}
 
+                                     {% if perms.talento_humano.delete_empleado %}
                                     <a href="{% url 'empleado.delete' empleado.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
+                                    {% endif %}
                                 </div>
 
                                 <div class="hidden-md hidden-lg">
@@ -116,21 +123,25 @@
 
                                         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
                                             <li>
+                                                {% if perms.talento_humano.change_empleado %}
                                                 <a href="{% url 'empleado.update' empleado.id %}"
                                                    class="tooltip-success" data-rel="tooltip" title="Editar">
                                                     <span class="green">
                                                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                                                     </span>
                                                 </a>
+                                                {% endif %}
                                             </li>
 
                                             <li>
+                                                {% if perms.talento_humano.delete_empleado %}
                                                 <a href="{% url 'empleado.delete' empleado.id %}"
                                                    class="tooltip-error" data-rel="tooltip" title="Eliminar">
                                                     <span class="red">
                                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                                     </span>
                                                 </a>
+                                                {% endif %}
                                             </li>
                                         </ul>
                                     </div>

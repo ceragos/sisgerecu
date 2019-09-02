@@ -15,6 +15,11 @@ class User(AbstractUser):
         unique_together = ('email',)
         verbose_name = "usuario"
         verbose_name_plural = "usuarios"
+        permissions = (
+            ('es_administrativo', 'Perfil administrativo'),
+            ('es_docente', 'Perfil docente'),
+            ('es_servicios_generales', 'Perfil servicios generales'),
+        )
 
     def __str__(self):
         return self.nombre_completo

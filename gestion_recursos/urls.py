@@ -24,7 +24,7 @@ urlpatterns = [
     path(r'recursos/', include('recursos.urls')),
     path(r'usuarios/', include('usuarios.urls')),
     path(r'agendas/', include('agendas.urls')),
-    path(r'notificaciones/', include('notificaciones.urls'))
+    path(r'notificaciones/', include('notificaciones.urls')),
 ]
 
 if settings.DEBUG:
