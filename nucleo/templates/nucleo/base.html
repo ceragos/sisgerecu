@@ -130,7 +130,7 @@
                                          {% if request.user.foto_perfil %}
                                             src="{{ request.user.foto_perfil.url }}"
                                          {% else %}
-                                            src="{% static 'nucleo/assets/images/avatars/avatar2.png' %}"
+                                            src="{% static 'nucleo/assets/images/avatars/avatar5.png' %}"
                                          {% endif %}
                                     />
 								<span class="user-info">
@@ -155,6 +155,13 @@
 									<a href="{% url 'perfil' %}">
 										<i class="ace-icon fa fa-user"></i>
 										Perfil
+									</a>
+								</li>
+
+                                <li>
+									<a href="{% url 'password_change' %}">
+										<i class="ace-icon fa fa-lock"></i>
+										Cambiar contraseña
 									</a>
 								</li>
 
@@ -196,6 +203,7 @@
 				</div>
 
 				<ul class="nav nav-list">
+                {% if perms.agendas.ver_agenda_general %}
 					<li class="{% if request.path|slice:":24" == '/agendas/agenda_general/' %}active{% endif %}">
 						<a href="{% url 'agenda_general.listar' %}">
 							<i class="menu-icon fa fa-desktop"></i>
@@ -206,8 +214,9 @@
 
 						<b class="arrow"></b>
 					</li>
+                {% endif %}
 
-                    {% if request.user.empleado.perfil.nombre == 'Docente' %}
+                    {% if perms.agendas.view_agenda %}
 					<li class="{% if request.path|slice:":19" == '/agendas/mi_agenda/' %}active{% endif %}">
 						<a href="{% url 'mi_agenda.listar' %}">
 							<i class="menu-icon fa fa-book"></i>
@@ -221,7 +230,7 @@
                     {% endif %}
 
 
-                    {% if request.user.empleado.perfil.nombre == 'Servicios Generales' %}
+                    {% if perms.agendas.view_minuta %}
 					<li class="{% if request.path|slice:":19" == '/agendas/minuta/' %}active{% endif %}">
 						<a href="{% url 'minuta.listar' %}">
 							<i class="menu-icon fa fa-check-square-o"></i>
@@ -234,8 +243,7 @@
 					</li>
                     {% endif %}
 
-
-                    {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
+                    {% if perms.talento_humano.view_empleado %}
 					<li class="{% if request.path|slice:":16" == '/talento_humano/' %}active{% endif %}">
 						<a href="{% url 'empleado.list' %}">
 							<i class="menu-icon fa fa-users"></i>
@@ -247,8 +255,7 @@
 						<b class="arrow"></b>
 					</li>
                     {% endif %}
-
-					{% if request.user.empleado.perfil.nombre != 'Servicios Generales' %}
+					{% if perms.recursos.view_recursofisico or perms.recursos.view_recursotecnologico %}
                     <li class="{% if request.path|slice:":10" == '/recursos/' %}active open{% endif %}">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-pencil-square-o"></i>
@@ -262,6 +269,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
+                        {% if perms.recursos.view_recursofisico %}
 							<li class="{% if request.path|slice:":18" == '/recursos/fisicos/' %}active{% endif %}">
 								<a href="{% url 'recursos.fisicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -270,7 +278,9 @@
 
 								<b class="arrow"></b>
 							</li>
+                        {% endif %}
 
+                        {% if perms.recursos.view_recursotecnologico %}
 							<li class="{% if request.path|slice:":23" == '/recursos/tecnologicos/' %}active{% endif %}">
 								<a href="{% url 'recursos.tecnologicos.listar' %}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -279,6 +289,7 @@
 
 								<b class="arrow"></b>
 							</li>
+                        {% endif %}
 						</ul>
 					</li>
                     {% endif %}

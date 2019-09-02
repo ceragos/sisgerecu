@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block header %}
-    {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
+    {% if perms.recursos.add_recursotecnologico %}
     <div class="pull-right hidden-xs" id="ace-settings-container">
         <a href="{% url 'recursos.tecnologicos.crear' %}" class="btn btn-primary align-right">
             <i class="ace-icon fa glyphicon-plus align-center bigger-125"></i>
@@ -26,10 +26,12 @@
 
     <div class="page-header">
         <h1>
+            {% if perms.recursos.add_recursotecnologico %}
             <a href="{% url 'recursos.tecnologicos.crear' %}"
                class="btn btn-primary btn-minier align-left hidden-md hidden-lg hidden-sm">
                 <i class="ace-icon fa glyphicon-plus align-center bigger-120 "></i>
             </a>
+            {% endif %}
             Recursos Tecnologicos
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
@@ -65,13 +67,14 @@
                             <td class="hidden-480">{{ recurso.caracteristicas }}</td>
                             <td class="hidden-480">{{ recurso.contenido }}</td>
                             <td>
-                                {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
                                 <div class="hidden-sm hidden-xs btn-group">
-
+                                {% if perms.recursos.change_recursotecnologico %}
                                     <a href="{% url 'recursos.tecnologicos.actualizar' recurso.id %}" class="btn btn-xs btn-info">
                                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </a>
+                                {% endif %}
 
+                                {% if perms.recursos.delete_recursotecnologico %}
                                     <a href="{% url 'recursos.tecnologicos.eliminar' recurso.id %}" class="btn btn-xs btn-danger">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
@@ -96,7 +99,7 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                        {% if request.user.empleado.perfil.nombre == 'Administrativo' %}
+                                        {% if perms.recursos.change_recursotecnologico %}
                                             <li>
                                                 <a href="{% url 'recursos.tecnologicos.actualizar' recurso.id %}"
                                                    class="tooltip-success" data-rel="tooltip" title="Editar">
@@ -105,7 +108,9 @@
                                                     </span>
                                                 </a>
                                             </li>
+                                        {% endif %}
 
+                                        {% if perms.recursos.delete_recursotecnologico %}
                                             <li>
                                                 <a href="{% url 'recursos.tecnologicos.eliminar' recurso.id %}"
                                                    class="tooltip-error" data-rel="tooltip" title="Eliminar">

@@ -33,6 +33,9 @@ class Agenda(MarcadorTiempo):
     class Meta:
         verbose_name = 'agenda'
         verbose_name_plural = 'agendas'
+        permissions = (
+            ('ver_agenda_general', 'Ver agenda general'),
+        )
 
     def __str__(self):
         return 'Separado por {} el {} desde las {} hasta las {}'.format(self.usuario.nombre_completo,
