@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.urls import path, include
 from django.conf import settings
 
@@ -26,11 +25,6 @@ urlpatterns = [
     path(r'usuarios/', include('usuarios.urls')),
     path(r'agendas/', include('agendas.urls')),
     path(r'notificaciones/', include('notificaciones.urls')),
-
-    path(r'password_change/', PasswordChangeView.as_view(template_name='usuarios/password_change_form.html'),
-         name='password_change'),
-    path(r'password_change_done/', PasswordChangeDoneView.as_view(template_name='usuarios/password_change_done.html'),
-         name='password_change_done')
 ]
 
 if settings.DEBUG:
