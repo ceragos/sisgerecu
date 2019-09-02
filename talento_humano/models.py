@@ -91,6 +91,6 @@ class Empleado(MarcadorTiempo, Persona):
     def __str__(self):
         return "%s %s" % (self.usuario.first_name, self.usuario.last_name)
 
-    def save(self, *args, **kwargs):
-        self.usuario.perm
-        super(Empleado, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.usuario.perm
+    #     super(Empleado, self).save(*args, **kwargs)
