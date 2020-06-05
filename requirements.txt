@@ -1,4 +1,4 @@
-Django==2.1.2
+Django==2.2.13
 PyMySQL==0.9.3
 cryptography==2.6.1
 django-crispy-forms==1.7.2
