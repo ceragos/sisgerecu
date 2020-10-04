@@ -1,3 +1,6 @@
+# Python
+Version 3.6.6
+
 # sisgerecu
 Sistema para la gestión de recursos
 
